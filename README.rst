@@ -23,6 +23,9 @@ Jordan - Project Manager
 Nick
   Skills: Databases, Backend
 
+Chet
+  Skills: Data management, Pandas
+
 ####
 # Project Overview
 ####
