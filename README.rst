@@ -12,7 +12,7 @@ Cam
   Skills: Databases, Backend, Minor HTML/CSS
   
 Jade
-  Skills: 
+  Skills: Backend, logic, text parsing
   
 John
   Skills: 
