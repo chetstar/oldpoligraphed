@@ -21,7 +21,7 @@ Jordan - Project Manager
   Skills: Front-End, Flask
   
 Nick
-  Skills: Databases, Backend
+  Skills: Databases, Backend,
 
 ####
 TODO
