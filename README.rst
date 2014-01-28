@@ -1,7 +1,6 @@
 PyClass_API_Project
 ===================
-
-This is a repo for our project
+An open source web app for visualizing word frequency of political statements over time using the Sunlight Foundation API. The application will feature user logins and saved searches.
 
 ####
 # Roster
