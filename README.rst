@@ -18,7 +18,7 @@ John
   Skills: 
   
 Jordan - Project Manager
-  Skills: Front-End, Flask
+  Skills: Front-End: HTML/CSS/Javascript. Python: Flask.
   
 Nick
   Skills: Databases, Backend
