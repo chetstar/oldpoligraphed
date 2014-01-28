@@ -8,8 +8,6 @@ An open source web app for visualizing word frequency of political statements ov
 ####
 Roster
 ####
-#Include name, role, skills, etc.
-
 Cam
   Skills: Databases, Backend, Minor HTML/CSS
 
