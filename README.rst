@@ -39,6 +39,11 @@ We know the project is finished when:
 ####
 How to Run
 ####
+Update pip and then setuptools
+
+$ pip install --upgrade setuptools
+
+
 #create and activate the venv
 
 open the main app directory
@@ -50,7 +55,7 @@ $ source bin/activate
 
 #pip install the requirements
 
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt --upgrade
 
 
 #run the app
