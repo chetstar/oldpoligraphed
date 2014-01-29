@@ -39,3 +39,15 @@ We know the project is finished when:
 ####
 How to Run
 ####
+#create and activate the venv
+open the main app directory
+$ virtualenv .
+$ source bin/activate
+
+#pip install the requirements
+$ pip install -r requirements.txt
+
+#run the app
+python src/app/__init__.py
+
+go to http://127.0.0.1:5000/
