@@ -39,7 +39,9 @@ We know the project is finished when:
 ####
 How to Run
 ####
-Update pip and then setuptools
+Update pip_ and then setuptools
+
+.. _pip: http://www.pip-installer.org/en/latest/installing.html
 
 $ pip install --upgrade setuptools
 
