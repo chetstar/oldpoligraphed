@@ -45,6 +45,9 @@ Update pip_ and then setuptools
 
 $ pip install --upgrade setuptools
 
+If installation is a pain try this
+$ pip install --allow-all-external --upgrade -r requirements.txt
+
 
 #create and activate the venv
 
