@@ -12,7 +12,7 @@ Cam
   Skills: Databases, Backend, Minor HTML/CSS
 
 Jade
-  Skills: Backend, logic, text parsing
+  Skills: Backend, logic, text parsing, Selenium - browser automation
   
 John
   Skills: 
