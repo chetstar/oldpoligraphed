@@ -31,4 +31,8 @@ def add_todo():
 @app.route('/')
 def index():
     todo_list = TodoItem.query.all()
-    return render_template('hello.html', todos = todo_list)
+    return render_template('hello.html', todos=todo_list)
+
+if __name__ == '__main__':
+    init_db()
+    app.run()
