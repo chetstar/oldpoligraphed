@@ -1,6 +1,15 @@
+import imp
+import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
+base_path = os.path.dirname(os.path.abspath(__file__))
+#import API_KEY
+_path = 'config.py'
+config_path = os.path.normpath(os.path.join(base_path, _path))
+config = imp.load_source('config', config_path)
+
+API_KEY = config.API_KEY
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
