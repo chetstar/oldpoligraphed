@@ -85,3 +85,15 @@ Create the file apikey.py under the src/app/ directory
 Inside of the apikey.py file:
 
 _API_KEY = '<your api key here>'
+
+####
+How to test
+####
+
+From within the project root:
+
+$ source bin/activate
+
+$ nosetests test/app_test.py
+
+or the name of whatever test file you are running
