@@ -39,6 +39,17 @@ We know the project is finished when:
 ####
 How to Run
 ####
+Update pip_ and then setuptools
+
+.. _pip: http://www.pip-installer.org/en/latest/installing.html
+
+$ pip install --upgrade setuptools
+
+If installation is a pain try this
+
+$ pip install --allow-all-external --upgrade -r requirements.txt
+
+
 #create and activate the venv
 
 open the main app directory
@@ -50,7 +61,7 @@ $ source bin/activate
 
 #pip install the requirements
 
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt --upgrade
 
 
 #run the app
