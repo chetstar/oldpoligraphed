@@ -81,6 +81,7 @@ Register: http://sunlightfoundation.com/api/accounts/register/
 
 Create a apikey.py file under the src/app/ directory
 
+
 Inside of the apikey.py file:
 
 _API_KEY = '<your api key here>'
