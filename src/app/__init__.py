@@ -3,23 +3,24 @@ from flask import Flask, request, render_template, redirect, url_for
 from model import db, TodoItem
 
 
-# class _DefaultSettings(object):
-#     USER_NAME = 'world'
-#     SECRET_KEY = 'development key'
-#     DEBUG = True
+class _DefaultSettings(object):
+    USER_NAME = 'world'
+    SECRET_KEY = 'development key'
+    DEBUG = True
 
 
 # create the application
 app = Flask(__name__)
-app.config.from_object(_DefaultSettings)
-del _DefaultSettings
+# app.config.from_object(_DefaultSettings)
+app.config.from_pyfile("config.py", silent = True)
+# del _DefaultSettings
 
 
 def init_db():
     """Create the database tables."""
     db.create_all()
 
-@app.route('/add'X, methods=['POST'])
+@app.route('/add', methods=['POST'])
 def add_todo():
     if 'todo_item' in request.form:
         todo = TodoItem(description = request.form['todo_item'])
