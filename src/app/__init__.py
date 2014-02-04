@@ -3,10 +3,10 @@ from flask import Flask, request, render_template, redirect, url_for
 from model import db, TodoItem
 
 
-class _DefaultSettings(object):
-    USER_NAME = 'world'
-    SECRET_KEY = 'development key'
-    DEBUG = True
+# class _DefaultSettings(object):
+#     USER_NAME = 'world'
+#     SECRET_KEY = 'development key'
+#     DEBUG = True
 
 
 # create the application
