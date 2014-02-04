@@ -1,4 +1,4 @@
-#No idea what the end goal is for these variables yet, or what format is proper
+#variables for ingestion by flask app
 
 class _DefaultSettings(object):
     USERNAME = 'world'
