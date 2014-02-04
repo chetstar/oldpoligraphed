@@ -2,6 +2,8 @@
 from flask import Flask, request, render_template, redirect, url_for
 from model import db, TodoItem
 
+# from src.app.config import API_KEY
+
 # create the application
 app = Flask(__name__)
 # app.config.from_object(_DefaultSettings)
