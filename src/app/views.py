@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
-from flask import Flask, request, render_template, redirect, url_for
-from model import db, TodoItem
+from flask import render_template, redirect, url_for
+from flask import Flask
+from flask import request
+from model import db
+from model import TodoItem
 
-# from src.app.config import API_KEY
+class _DefaultSettings(object):
+    USER_NAME = 'world'
+    SECRET_KEY = 'development key'
+    DEBUG = True
+
 
 # create the application
 app = Flask(__name__)
-# app.config.from_object(_DefaultSettings)
 app.config.from_pyfile("config.py", silent = True)
 # del _DefaultSettings
 

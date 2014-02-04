@@ -37,6 +37,9 @@
               <li>{{ todo.description }}</li>
               {% endfor %}
             <ul>
+            <ul>
+              <li>{{ api }}</li>
+            <ul>
             <form action="/add" method="POST" id="add_to_todo_list">
                <input type="text" name="todo_item"/>
                <input type="submit" class="btn" name="add_todo_submit" value="Add to List!"/>
