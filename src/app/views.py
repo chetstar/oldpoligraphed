@@ -4,11 +4,7 @@ from flask import request
 from model import db
 from model import TodoItem
 
-class _DefaultSettings(object):
-    USER_NAME = 'world'
-    SECRET_KEY = 'development key'
-    DEBUG = True
-
+# from src.app.config import API_KEY
 
 # create the application
 app = Flask(__name__)

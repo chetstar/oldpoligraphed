@@ -12,11 +12,6 @@ apikey_path = '../src/app/apikey.py'
 test_apikey_path = os.path.normpath(os.path.join(test_base_path, apikey_path))
 apikey = imp.load_source('apikey', test_apikey_path)
 
-# expected = model.API_KEY
-# actual = apikey._API_KEY
-
-# print expected, actual
-
 class TestApp(unittest.TestCase):
 
     def detUp(self):
