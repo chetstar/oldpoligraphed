@@ -4,7 +4,7 @@ from model import db, TodoItem
 
 
 class _DefaultSettings(object):
-    USERNAME = 'world'
+    USER_NAME = 'world'
     SECRET_KEY = 'development key'
     DEBUG = True
 
@@ -19,7 +19,7 @@ def init_db():
     """Create the database tables."""
     db.create_all()
 
-@app.route('/add', methods=['POST'])
+@app.route('/add'X, methods=['POST'])
 def add_todo():
     if 'todo_item' in request.form:
         todo = TodoItem(description = request.form['todo_item'])
@@ -32,7 +32,3 @@ def add_todo():
 def index():
     todo_list = TodoItem.query.all()
     return render_template('hello.html', todos=todo_list)
-
-if __name__ == '__main__':
-    init_db()
-    app.run()
