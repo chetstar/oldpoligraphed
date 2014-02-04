@@ -66,7 +66,20 @@ $ pip install -r requirements.txt --upgrade
 
 #run the app
 
-python src/app/__init__.py
-
+python run.py
 
 go to http://127.0.0.1:5000/
+
+
+####
+API Key
+####
+
+To run this app you must have an api key from sunlight academy. 
+
+Register: http://sunlightfoundation.com/api/accounts/register/
+
+Create a apikey.py file under the src/app/ directory
+
+Inside of the apikey.py file:
+_API_KEY = '<your api key here>'
