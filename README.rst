@@ -79,7 +79,7 @@ To run this app you must have an api key from sunlight academy.
 
 Register: http://sunlightfoundation.com/api/accounts/register/
 
-Create a apikey.py file under the src/app/ directory
+Create the file apikey.py under the src/app/ directory
 
 
 Inside of the apikey.py file:
