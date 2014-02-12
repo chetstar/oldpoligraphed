@@ -8,7 +8,7 @@ from model import TodoItem
 
 # create the application
 app = Flask(__name__)
-app.config.from_pyfile("config.py", silent = True)
+app.config.from_pyfile("config", silent = True)
 # del _DefaultSettings
 
 

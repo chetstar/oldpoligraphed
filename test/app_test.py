@@ -5,7 +5,7 @@ from PyClass_API_Project.src.app.config import API_KEY
 
 class TestApp(unittest.TestCase):
 
-    def detUp(self):
+    def setUp(self):
         pass
 
     def tearDown(self):

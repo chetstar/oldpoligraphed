@@ -7,9 +7,8 @@ from model import db, TodoItem
 # create the application
 app = Flask(__name__)
 # app.config.from_object(_DefaultSettings)
-app.config.from_pyfile("config.py", silent = True)
+app.config.from_pyfile("config", silent = True)
 # del _DefaultSettings
-
 
 def init_db():
     """Create the database tables."""
