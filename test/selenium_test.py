@@ -1,14 +1,15 @@
 """Selenium Test 
-Tests input field and submits to list.
+Tests input field and submits new item to list.
 """
 
+import random
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import random
+
 
 driver = webdriver.Firefox()
 
