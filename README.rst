@@ -45,10 +45,6 @@ Update pip_ and then setuptools
 
 $ pip install --upgrade setuptools
 
-If installation is a pain try this
-
-$ pip install --allow-all-external --upgrade -r requirements.txt
-
 
 #create and activate the venv
 
@@ -62,6 +58,10 @@ $ source bin/activate
 #pip install the requirements
 
 $ pip install -r requirements.txt --upgrade
+
+If installation is a pain try this
+
+$ pip install --allow-all-external --upgrade -r requirements.txt
 
 
 #run the app
