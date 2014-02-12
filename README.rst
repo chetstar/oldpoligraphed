@@ -108,3 +108,5 @@ $ source bin/activate
 $ python run.py
 
 $ python test/selenium_test.py
+
+test
