@@ -2,6 +2,7 @@ bin/
 lib/
 include/
 local/
+man/
 **/*.pyc
 src/app/apikey.py
 
