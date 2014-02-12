@@ -1,10 +1,12 @@
+import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+basedir = os.path.abspath(os.path.dirname(__file__))
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db') 
+db = SQLAlchemy(app)
 
 class TodoItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
