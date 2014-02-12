@@ -45,10 +45,6 @@ Update pip_ and then setuptools
 
 $ pip install --upgrade setuptools
 
-If installation is a pain try this
-
-$ pip install --allow-all-external --upgrade -r requirements.txt
-
 
 #create and activate the venv
 
@@ -62,6 +58,10 @@ $ source bin/activate
 #pip install the requirements
 
 $ pip install -r requirements.txt --upgrade
+
+If installation is a pain try this
+
+$ pip install --allow-all-external --upgrade -r requirements.txt
 
 
 #run the app
@@ -85,3 +85,15 @@ Create the file apikey.py under the src/app/ directory
 Inside of the apikey.py file:
 
 _API_KEY = '<your api key here>'
+
+####
+How to test
+####
+
+From within the project root:
+
+$ source bin/activate
+
+$ nosetests test/app_test.py
+
+or the name of whatever test file you are running
