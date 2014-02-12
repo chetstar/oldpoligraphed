@@ -1,3 +1,7 @@
+"""Selenium Test 
+Tests input field and submits to list.
+"""
+
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
 from selenium.common.exceptions import TimeoutException
@@ -16,9 +20,9 @@ input_element.send_keys("cheese!")
 # submit the form (although google automatically searches now without submitting)
 input_element.submit()
 
-try:
-    WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element("html/body/div[2]/div/div[2]/div[1]/ul", "cheese!"))
-    print driver.title
+#try:
+#    WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element("html/body/div[2]/div/div[2]/div[1]/ul", "cheese!"))
+#    print driver.title
 
-finally:
-    driver.quit()
+#finally:
+#   driver.quit()
