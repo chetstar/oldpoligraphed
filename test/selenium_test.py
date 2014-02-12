@@ -16,6 +16,7 @@ driver.get("http://127.0.0.1:5000/")
 #title = driver.find_element_by_xpath("html/body/div[2]/div/div[1]/h1") == "Noiselist"):
 input_element = driver.find_element_by_xpath(".//*[@id='add_to_todo_list']/input[1]")
 input_element.send_keys("cheese!")
+WebDriverWait(driver, 10)
 
 # submit the form (although google automatically searches now without submitting)
 input_element.submit()
