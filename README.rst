@@ -97,3 +97,13 @@ $ source bin/activate
 $ nosetests test/app_test.py
 
 or the name of whatever test file you are running
+
+
+
+To run selenium test:
+
+From within the project root:
+
+$ source bin/activate
+
+$ python test/selenium_test.py
