@@ -1,29 +1,18 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, render_template, redirect, url_for
-from model import db, TodoItem
-
-# from src.app.config import API_KEY
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 
 # create the application
 app = Flask(__name__)
+
 # app.config.from_object(_DefaultSettings)
 app.config.from_pyfile("config", silent = True)
 # del _DefaultSettings
 
+db = SQLAlchemy(app)
 def init_db():
     """Create the database tables."""
     db.create_all()
+init_db()
 
-@app.route('/add', methods=['POST'])
-def add_todo():
-    if 'todo_item' in request.form:
-        todo = TodoItem(description = request.form['todo_item'])
-        db.session.add(todo)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return "Unknown Error"
-
-@app.route('/')
-def index():
-    todo_list = TodoItem.query.all()
-    return render_template('hello.html', todos=todo_list)
+from app import views, model
