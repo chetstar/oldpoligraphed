@@ -15,14 +15,7 @@ def add_todo():
 @app.route('/')
 def index():
     todo_list = TodoItem.query.all()
-<<<<<<< HEAD
     return render_template('hello.html', todos=todo_list)
-
-@app.route('/base_html')
-def base_html():
-    return render_template('basejd.html')
-=======
-    return render_template('base.html', todos=todo_list)
 
 @app.route('/about')
 def about():
@@ -35,4 +28,7 @@ def contact():
 @app.route('/dataInput')
 def dataInput():
     return "dataInput!"
->>>>>>> 28c09a2f9e46c7dbea5a635b93b6d6d497da858f
+
+@app.route('/base_html')
+def base_html():
+    return render_template('basejd.html')
