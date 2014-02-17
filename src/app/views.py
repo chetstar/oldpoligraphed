@@ -16,3 +16,7 @@ def add_todo():
 def index():
     todo_list = TodoItem.query.all()
     return render_template('hello.html', todos=todo_list)
+
+@app.route('/base_html')
+def base_html():
+    return render_template('basejd.html')
