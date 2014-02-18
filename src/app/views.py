@@ -15,7 +15,7 @@ def add_todo():
 @app.route('/')
 def index():
     todo_list = TodoItem.query.all()
-    return render_template('hello.html', todos=todo_list)
+    return render_template('index.html', todos=todo_list)
 
 @app.route('/about')
 def about():
