@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Index - Pyclass API Project</title>
 <link href="../static/css/style.css" rel="stylesheet" type="text/css" /><!--[if lte IE 7]>
 <style>
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
@@ -14,12 +14,30 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <body>
 
 <div class="container">
-  <div class="header">Header text/image goes here.
+  <div class="header">
+  <div class="navbar">
+  <b>
+  	<div class="navitem">
+    	<a href="#">Home</a>
+    </div>
+    <div class="navitem">
+    	<a href="{{ url_for('dataInput') }}">Data Upload</a>
+    </div>
+    <div class="navitem">
+    	<a href="{{ url_for('about') }}">About</a>
+    </div>
+    <div class="navitem">
+    	<a href="{{ url_for('contact') }}">Contact</a>
+    </div>
+  </b>
+  </div>
+  <div class="loginform">
     <form action="" class="pull-right">
       <input class="input-small" type="text" placeholder="Username">
       <input class="input-small" type="password" placeholder="Password">
       <button class="btn" type="submit">Sign in</button>
     </form>
+  </div>
   </div>
   <div class="sidebar">
     <ul class="nav">
@@ -43,13 +61,16 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <div class="term">
       Term 2: term 2 here
       </div>
+      <div class="term">
       <form action="/add" method="POST" id="add_to_todo_list">
                <input type="text" name="todo_item"/>
                <input type="submit" class="btn" name="add_todo_submit" value="Submit Data!"/>
       </form>
+      </div>
     </div>
     <div class="save">
-    Save graph
+    <input type="submit" class="btn" name="save_graph" value="Save Graph"/>
+    </form>
     </div>
   </div>
   <div class="footer">

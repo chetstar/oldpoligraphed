@@ -27,11 +27,11 @@ a img {
 }
 
 a:link {
-	color:#414958;
+	color: #000000;
 	text-decoration: underline;
 }
 a:visited {
-	color: #4E5869;
+	color: #000000;
 	text-decoration: underline;
 }
 a:hover, a:active, a:focus {
@@ -52,6 +52,30 @@ a:hover, a:active, a:focus {
 	height: 100px;
 }
 
+.loginform {
+	float: right;
+	height: 30px;
+	width: auto;
+	margin-right: 20px;
+	padding-top: 60px;
+}
+
+.navbar {
+	float: left;
+	height: 30px;
+	width: auto;
+	padding-left: 15px;
+	padding-top: 63px;
+}
+
+.navitem {
+	float: left;
+	height: 30px;
+	width: auto;
+	padding-right: 15px;
+	font
+}
+
 .sidebar {
 	position: absolute;
 	float: left;
@@ -61,7 +85,7 @@ a:hover, a:active, a:focus {
 }
 .content {
 	float: right;
-	padding: 10px 0;
+	padding: 10px;
 	width: 620px;
 }
 
