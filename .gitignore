@@ -8,3 +8,4 @@ man/
 **/**/**/*.pyc
 src/app/apikey.py
 .Python
+src/app/app.db
