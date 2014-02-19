@@ -4,5 +4,7 @@ include/
 local/
 man/
 **/*.pyc
+**/**/*.pyc
+**/**/**/*.pyc
 src/app/apikey.py
-
+.Python
