@@ -2,13 +2,14 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
-from flask.ext.login import LoginManager
-from flask.ext.openid import OpenID
+#from flask.ext.login import LoginManager
+#from flask.ext.openid import OpenID
 import os
 from config import basedir
 
 lm = LoginManager()
 lm.init_app(app)
+lm.login_view = 'login'
 # need a tmp folder
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
