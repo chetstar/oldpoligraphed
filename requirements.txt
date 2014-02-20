@@ -15,4 +15,6 @@ requests==2.2.1
 selenium==2.39.0
 wsgiref==0.1.2
 flask-bootstrap
+flask-login
+flask/bin/pip install flask-wtf==0.8.4
 
