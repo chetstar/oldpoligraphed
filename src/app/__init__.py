@@ -7,11 +7,11 @@ from flask.ext.bootstrap import Bootstrap
 import os
 from config import basedir
 
-lm = LoginManager()
-lm.init_app(app)
-lm.login_view = 'login'
+#lm = LoginManager()
+#lm.init_app(app)
+#lm.login_view = 'login'
 # need a tmp folder
-oid = OpenID(app, os.path.join(basedir, 'tmp'))
+#oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
 # create the application
 app = Flask(__name__)
