@@ -1,7 +1,8 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block content %}
+{% block page_content %}
 <script type="text/javascript">
 function set_openid(openid, pr)
 {
@@ -11,24 +12,17 @@ function set_openid(openid, pr)
         user = prompt('Enter your ' + pr + ' username:')
         openid = openid.substr(0, u) + user
     }
-    form = document.forms['login'];
-    form.elements['openid'].value = openid
+
+    $(document).find('form').attr("role","login").find("#openid").val(openid);
 }
 </script>
-<h1>Sign In</h1>
-<form action="" method="post" name="login">
-    {{form.hidden_tag()}}
-    <p>
-        Please enter your OpenID, or select one of the providers below:<br>
-        {{form.openid(size=80)}}
-        {% for error in form.errors.openid %}
-        <span style="color: red;">[{{error}}]</span>
-        {% endfor %}<br>
-        |{% for pr in providers %}
-        <a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
-        {% endfor %}
-    </p>
-    <p>{{form.remember_me}} Remember Me</p>
-    <p><input type="submit" value="Sign In"></p>
-</form>
+<div class="page-header">
+    <h1>Sign In</h1>
+</div>
+    {{ wtf.quick_form(form, role="login") }}
+    <br>
+    |{% for pr in providers %}
+    <a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
+    {% endfor %}
+
 {% endblock %}
