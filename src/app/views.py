@@ -1,4 +1,7 @@
 from app import app, db, lm, oid
+from app.apikey import _API_KEY
+import requests
+import json
 from forms import LoginForm
 from model import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g
@@ -16,6 +19,31 @@ def save_graph():
         db.session.commit()
         return redirect(url_for('test_save_graph'))
     return "Must complete all form fields."
+
+
+@app.route('/graph', methods=['POST'])
+def graph():
+    API_KEY = _API_KEY
+    form_keyword = request.form['graph_keyword']
+    query_params = {'apikey': API_KEY,
+                'phrase': form_keyword,
+                'start_date': '2014-01-06',
+                'end_date': '2014-01-11',
+                'granularity': 'day'
+                }
+
+    endpoint = 'http://capitolwords.org/api/dates.json'
+
+    response = requests.get(endpoint, params=query_params)
+    json_data = json.loads(response.text)
+
+    api_results = []
+    for item in json_data['results']:
+        api_results.append({item['day']: item['count']})
+
+    saved_graphs = SavedGraph.query.all()
+    return render_template('testSaveGraph.html', saved_graphs=saved_graphs, graph=api_results)
+    # return redirect(url_for('test_save_graph'))
 
 
 @app.route('/')

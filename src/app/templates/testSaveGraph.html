@@ -26,4 +26,23 @@
   <input type="submit" class="btn" name="save_graph_submit" value="Save Graph!"/>
 </form>
 </div>
+
+<h2>Graph Data</h2>
+<ul>
+  {% for dict in graph %}
+    {% for key, value in dict.iteritems() %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+<div style="height:auto; width: 100%; float:left">
+<div style="width:172px; padding:4px; float:left">API Keyword:</div>
+</div>
+<div style="height:auto; width: 100%; float:left">
+<form action="/graph" method="POST" id="graph">
+  <input type="text" name="graph_keyword"/>
+  <input type="submit" class="btn" name="graph_submit" value="Graph!"/>
+</form>
+</div>
+
 </html>
