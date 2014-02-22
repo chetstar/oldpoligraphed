@@ -1,0 +1,29 @@
+<html>
+<h2>Saved Graphs</h2>
+<ul>
+    {% for graph in saved_graphs %}
+      <li>{{ graph }}</li>
+      <li>Name: {{ graph.graph_name }}</li>
+      <li>Keyword 1: {{ graph.keyword_1 }}</li>
+      <li>Keyword 2: {{ graph.keyword_2 }}</li>
+    {% endfor %}
+
+</ul>
+
+<p>All fields must have values to submit.</p>
+
+<div style="height:auto; width: 100%; float:left">
+<div style="width:172px; padding:4px; float:left">Graph Name:</div>
+<div style="width:172px; padding:4px; float:left">Keyword 1:</div>
+<div style="width:172px; padding:4px; float:left">Keyword 2:</div>
+</div>
+
+<div style="height:auto; width: 100%; float:left">
+<form action="/add" method="POST" id="save_graph">
+  <input type="text" name="graph_name"/>
+  <input type="text" name="keyword_1"/>
+  <input type="text" name="keyword_2"/>
+  <input type="submit" class="btn" name="save_graph_submit" value="Save Graph!"/>
+</form>
+</div>
+</html>

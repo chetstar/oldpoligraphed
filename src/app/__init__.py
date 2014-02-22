@@ -12,10 +12,12 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 # app.config.from_object(_DefaultSettings)
-app.config.from_pyfile("config", silent = True)
+app.config.from_pyfile("config", silent=True)
 # del _DefaultSettings
 
 db = SQLAlchemy(app)
+
+
 def init_db():
     """Create the database tables."""
     db.create_all()

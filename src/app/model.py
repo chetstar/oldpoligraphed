@@ -3,21 +3,27 @@ from app import db
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-class TodoItem(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(240), unique=True)
 
-    def __init__(self, description):
-        self.description = description
+class SavedGraph(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    graph_name = db.Column(db.String(240))
+    keyword_1 = db.Column(db.String(240))
+    keyword_2 = db.Column(db.String(240))
+
+    def __init__(self, graph_name, keyword_1, keyword_2):
+        self.graph_name = graph_name
+        self.keyword_1 = keyword_1
+        self.keyword_2 = keyword_2
 
     def __repr__(self):
-        return '<TODO %r>' % self.description
+        return '<Graph %r>' % self.id
+
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    nickname = db.Column(db.String(64), unique = True)
-    email = db.Column(db.String(120), unique = True)
-    role = db.Column(db.SmallInteger, default = ROLE_USER)
+    id = db.Column(db.Integer, primary_key=True)
+    nickname = db.Column(db.String(64), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    role = db.Column(db.SmallInteger, default=ROLE_USER)
 
     def is_authenticated(self):
         return True
