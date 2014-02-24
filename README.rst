@@ -26,6 +26,9 @@ Nick
 Chet
     Skills: Data management, Pandas
 
+Chet
+  Skills: Data management, Pandas
+
 ####
 TODO
 ####
