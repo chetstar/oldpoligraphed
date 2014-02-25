@@ -51,7 +51,7 @@ def graph():
 @login_required
 def index():
     user = g.user
-    return render_template('base.html', user=user)
+    return render_template('index.html', user=user)
 
 
 @app.route('/about')

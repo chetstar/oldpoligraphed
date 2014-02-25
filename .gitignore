@@ -16,3 +16,4 @@ src/app.db
 **/tmp/nonces
 **/tmp/temp
 src/migrations
+migrations/
