@@ -24,9 +24,6 @@ Nick
   Skills: Databases, Backend,
 
 Chet
-    Skills: Data management, Pandas
-
-Chet
   Skills: Data management, Pandas
 
 ####
