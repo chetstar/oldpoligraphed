@@ -1,5 +1,5 @@
 from app import app, db, lm, oid
-from app.apikey import _API_KEY
+from apikey import _API_KEY
 import requests
 import json
 from forms import LoginForm

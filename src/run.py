@@ -1,6 +1,5 @@
 #!flask/bin/python
-from app import init_db, app
+from app import manager
 
 if __name__ == '__main__':
-    init_db()
-    app.run()
+    manager.run()

@@ -13,13 +13,13 @@ Cam
 
 Jade
   Skills: Backend, logic, text parsing, Selenium - browser automation
-  
+
 John
-  Skills: 
-  
+  Skills:
+
 Jordan - Project Manager
   Skills: Front-End: HTML/CSS/Javascript. Python: Flask.
-  
+
 Nick
   Skills: Databases, Backend,
 
@@ -78,11 +78,11 @@ go to http://127.0.0.1:5000/
 API Key
 ####
 
-To run this app you must have an api key from sunlight academy. 
+To run this app you must have an api key from sunlight academy.
 
 Register: http://sunlightfoundation.com/api/accounts/register/
 
-Create the file apikey.py under the src/app/ directory
+Create the file apikey.py under the src/ directory
 
 
 Inside of the apikey.py file:
