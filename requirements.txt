@@ -17,4 +17,3 @@ wsgiref==0.1.2
 flask-bootstrap
 flask-login
 flask-wtf==0.8.4
-
