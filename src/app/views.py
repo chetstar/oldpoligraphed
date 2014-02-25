@@ -3,7 +3,7 @@ from apikey import _API_KEY
 import requests
 import json
 from forms import LoginForm
-from model import User, ROLE_USER, ROLE_ADMIN, SavedGraph
+from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 

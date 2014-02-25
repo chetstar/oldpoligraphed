@@ -28,4 +28,4 @@ lm.init_app(app)
 lm.login_view = 'login'
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
-from app import views, model
+from app import views, models
