@@ -40,7 +40,7 @@ We know the project is finished when:
 	  -search
 
 ####
-How to Run
+How to Install
 ####
 Update pip_ and then setuptools
 
@@ -66,13 +66,27 @@ If installation is a pain try this
 
 $ pip install --allow-all-external --upgrade -r requirements.txt
 
+####
+How to Setup the Database and Migrations
+####
 
-#run the app
+Alembic Migration Tutorial_
 
-python run.py
+.. _Tutorial: http://blog.miguelgrinberg.com/post/flask-migrate-alembic-database-migration-wrapper-for-flask
 
-go to http://127.0.0.1:5000/
+cd to the src folder
 
+To add migration support to your database you just need to run the init command:
+
+$ python run.py db init
+
+To issue your first migration you can run the following command:
+
+$ python run.py db migrate
+
+The next step is to apply the migration to the database. For this you use the upgrade command:
+
+$ python run.py db upgrade
 
 ####
 API Key
@@ -84,10 +98,21 @@ Register: http://sunlightfoundation.com/api/accounts/register/
 
 Create the file apikey.py under the src/ directory
 
-
 Inside of the apikey.py file:
 
 _API_KEY = '<your api key here>'
+
+####
+How to Run
+####
+
+#run the app
+
+From the src folder:
+
+$ python run.py runserver
+
+go to http://127.0.0.1:5000/ or localhost:5000
 
 ####
 How to test
