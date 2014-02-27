@@ -7,12 +7,16 @@
 {% if active_page == 'index' %}
 {% set navigation_bar = [
     ('/contact', 'contact', 'Contact'),
-    ('/about', 'about', 'About')
+    ('/about', 'about', 'About'),
+            ('/jobs', 'jobs', 'Jobs'),
+                ('/donations', 'donations', 'Donations')
 ] -%}
 {% else %}
 {% set navigation_bar = [
     ('/contact', 'contact', 'Contact'),
     ('/about', 'about', 'About'),
+        ('/jobs', 'jobs', 'Jobs'),
+            ('/donations', 'donations', 'Donations'),
         ('/', 'index', 'Home')
 ] -%}
 {% endif %}
