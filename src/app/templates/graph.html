@@ -15,12 +15,25 @@
 </ul>
 </div>
 <div style="width: auto; float: left">
+<div style="width: 100%; float: left; padding-bottom: 15px">
+<form role="form" action="/submit_graph" method="POST" id="submit_graph">
+  <div style="float: left; padding-left: 15px">
+  <input type="hidden" value="{{ graph.keyword_1 }}" name="graph_keyword"/>
+  <div style="float: left;">
+  <input type="submit" class="btn" name="submit_graph_api" value="Graph!"/>
+  </div>
+  </div>
+</form>
+</div>
+
+<div style="width: 100%; float: left padding-bottom: 15px">
   <form role="form" action="/delete_graph" method="POST" id="delete_graph">
     <div style="float: left; padding-left: 15px">
     <input type="hidden" value="{{ graph.id }}" name="deleted_graph_id"/>
     <input type="submit" class="btn" name="delete_graph" value="Delete Graph"/>
     </div>
   </form>
+</div>
 </div>
 </div>
 {% endfor %}
