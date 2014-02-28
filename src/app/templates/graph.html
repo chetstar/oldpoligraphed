@@ -18,7 +18,8 @@
 <div style="width: 100%; float: left; padding-bottom: 15px">
 <form role="form" action="/submit_graph" method="POST" id="submit_graph">
   <div style="float: left; padding-left: 15px">
-  <input type="hidden" value="{{ graph.keyword_1 }}" name="graph_keyword"/>
+  <input type="hidden" value="{{ graph.keyword_1 }}" name="graph_keyword_1"/>
+  <input type="hidden" value="{{ graph.keyword_2 }}" name="graph_keyword_2"/>
   <div style="float: left;">
   <input type="submit" class="btn" name="submit_graph_api" value="Graph!"/>
   </div>
@@ -64,19 +65,30 @@
 
 <div style="width: 100%; float: left">
 <h2>Graph Data</h2>
-<ul>
-  {% for dict in graph %}
-    {% for key, value in dict.iteritems() %}
-      <li>{{ key }}: {{ value }}</li>
-    {% endfor %}
-  {% endfor %}
-</ul>
+  {% if graph %}
+      <div style="width: 100%; float:left; padding-bottom: 15px">
+      {% for keyword, results in graph.iteritems() %}
+      <div style="width: 172px; float:left; word-wrap: break-word; margin-right: 15px; text-wrap: unrestricted">
+      Keyword: {{ keyword }}
+        {% for dict in results %}
+          {% for key, value in dict.iteritems() %}
+            <li>{{ key }}: {{ value }}</li>
+          {% endfor %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 <div style="height:auto; width: 100%; float:left">
 <div style="height:auto; width: 100%; float:left">
 <form role="form" action="/submit_graph" method="POST" id="submit_graph">
   <div style="float: left; margin-right: 15px">
-  <label>API Keyword</label>
-  <input type="text" class="form-control" style="width: 172px" name="graph_keyword"/>
+  <label>API Keyword 1</label>
+  <input type="text" class="form-control" style="width: 172px" name="graph_keyword_1"/>
+  </div>
+  <div style="float: left; margin-right: 15px">
+  <label>API Keyword 2</label>
+  <input type="text" class="form-control" style="width: 172px" name="graph_keyword_2"/>
   </div>
   <div style="float: left;">
   <div style="float: left; padding-top: 25px">

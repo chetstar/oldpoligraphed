@@ -27,22 +27,29 @@ def save_graph():
 @app.route('/submit_graph', methods=['POST'])
 def submit_graph():
     API_KEY = _API_KEY
-    form_keyword = request.form['graph_keyword']
-    query_params = {'apikey': API_KEY,
-                    'phrase': form_keyword,
-                    'start_date': '2014-01-06',
-                    'end_date': '2014-01-11',
-                    'granularity': 'day'
-                    }
+    form_keywords = [
+        request.form['graph_keyword_1'],
+        request.form['graph_keyword_2']]
 
-    endpoint = 'http://capitolwords.org/api/dates.json'
+    api_results = {}
+    for keyword in form_keywords:
+        query_params = {'apikey': API_KEY,
+                        'phrase': keyword,
+                        'start_date': '2014-01-06',
+                        'end_date': '2014-01-11',
+                        'granularity': 'day'
+                        }
 
-    response = requests.get(endpoint, params=query_params)
-    json_data = json.loads(response.text)
+        endpoint = 'http://capitolwords.org/api/dates.json'
 
-    api_results = []
-    for item in json_data['results']:
-        api_results.append({item['day']: item['count']})
+        response = requests.get(endpoint, params=query_params)
+        json_data = json.loads(response.text)
+
+        keyword_results = []
+        for item in json_data['results']:
+            keyword_results.append({item['day']: item['count']})
+
+        api_results[keyword] = keyword_results
 
     saved_graphs = SavedGraph.query.all()
     return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results)
