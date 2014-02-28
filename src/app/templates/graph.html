@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Graphs{% endblock %}
+
+{% block page_content %}
+<h2>Saved Graphs</h2>
+<ul>
+    {% for graph in saved_graphs %}
+      <li>{{ graph }}</li>
+      <li>User ID: {{ graph.user_id }}</li>
+      <li>Name: {{ graph.graph_name }}</li>
+      <li>Keyword 1: {{ graph.keyword_1 }}</li>
+      <li>Keyword 2: {{ graph.keyword_2 }}</li>
+    {% endfor %}
+
+</ul>
+
+<p>All fields must have values to submit.</p>
+
+<div style="width: 100%; float: left">
+<form role="form" action="/add" method="POST" id="save_graph">
+  <div class="form-group">
+  <div style="float: left;">
+  <label>Graph Name</label>
+  <input ytpe="text" class="form-control" style="width: 172px; margin-right: 15px" name="graph_name"/>
+  </div>
+  <div style="float: left;">
+  <label>Keyword 1</label>
+  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="keyword_1"/>
+  </div>
+  <div style="float: left;">
+  <label>Keyword 2</label>
+  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="keyword_2"/>
+  </div>
+  <div style="float: left; padding-top: 25px">
+  <input type="submit" class="btn" name="save_graph_submit" value="Save Graph!"/>
+  </div>
+</div>
+</form>
+</div>
+
+<div style="width: 100%; float: left">
+<h2>Graph Data</h2>
+<ul>
+  {% for dict in graph %}
+    {% for key, value in dict.iteritems() %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+<div style="height:auto; width: 100%; float:left">
+<div style="height:auto; width: 100%; float:left">
+<form role="form" action="/submit_graph" method="POST" id="submit_graph">
+  <div style="float: left; margin-right: 15px">
+  <label>API Keyword</label>
+  <input type="text" class="form-control" style="width: 172px" name="graph_keyword"/>
+  </div>
+  <div style="float: left;">
+  <div style="float: left; padding-top: 25px">
+  <input type="submit" class="btn" name="submit_graph_api" value="Graph!"/>
+  </div>
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}

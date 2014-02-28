@@ -10,27 +10,30 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 
 @app.route('/add', methods=['POST'])
 def save_graph():
+    user_id = 999
+    #replace with functioning user ID
     if request.form['graph_name'] and request.form['keyword_1'] and request.form['keyword_2']:
         save_graph = SavedGraph(
+            user_id=user_id,
             graph_name=request.form['graph_name'],
             keyword_1=request.form['keyword_1'],
             keyword_2=request.form['keyword_2'])
         db.session.add(save_graph)
         db.session.commit()
-        return redirect(url_for('test_save_graph'))
+        return redirect(url_for('graph'))
     return "Must complete all form fields."
 
 
-@app.route('/graph', methods=['POST'])
-def graph():
+@app.route('/submit_graph', methods=['POST'])
+def submit_graph():
     API_KEY = _API_KEY
     form_keyword = request.form['graph_keyword']
     query_params = {'apikey': API_KEY,
-                'phrase': form_keyword,
-                'start_date': '2014-01-06',
-                'end_date': '2014-01-11',
-                'granularity': 'day'
-                }
+                    'phrase': form_keyword,
+                    'start_date': '2014-01-06',
+                    'end_date': '2014-01-11',
+                    'granularity': 'day'
+                    }
 
     endpoint = 'http://capitolwords.org/api/dates.json'
 
@@ -42,8 +45,7 @@ def graph():
         api_results.append({item['day']: item['count']})
 
     saved_graphs = SavedGraph.query.all()
-    return render_template('testSaveGraph.html', saved_graphs=saved_graphs, graph=api_results)
-    # return redirect(url_for('test_save_graph'))
+    return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results)
 
 
 @app.route('/')
@@ -58,13 +60,16 @@ def index():
 def about():
     return render_template('about.html')
 
+
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html')
 
+
 @app.route('/donations')
 def donations():
     return render_template('donations.html')
+
 
 @app.route('/contact')
 def contact():
@@ -120,7 +125,7 @@ def after_login(resp):
     return redirect(request.args.get('next') or url_for('index'))
 
 
-@app.route('/testSaveGraph')
-def test_save_graph():
+@app.route('/graph')
+def graph():
     saved_graphs = SavedGraph.query.all()
-    return render_template('testSaveGraph.html', saved_graphs=saved_graphs)
+    return render_template('graph.html', saved_graphs=saved_graphs)
