@@ -48,6 +48,16 @@ def submit_graph():
     return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results)
 
 
+@app.route('/delete_graph', methods=['POST'])
+def delete_graph():
+    deleted_graph_id = request.form['deleted_graph_id']
+    # deleted_graph_id = 1
+    deleted_graph = db.session.query(SavedGraph).filter_by(id=deleted_graph_id).first()
+    db.session.delete(deleted_graph)
+    db.session.commit()
+    return redirect(url_for('graph'))
+
+
 @app.route('/')
 @app.route('/index')
 @login_required

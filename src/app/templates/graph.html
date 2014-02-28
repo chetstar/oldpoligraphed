@@ -3,16 +3,27 @@
 
 {% block page_content %}
 <h2>Saved Graphs</h2>
+{% for graph in saved_graphs %}
+<div style="width: 100%; float: left">
+<div style="width: 200px; float: left">
 <ul>
-    {% for graph in saved_graphs %}
       <li>{{ graph }}</li>
       <li>User ID: {{ graph.user_id }}</li>
       <li>Name: {{ graph.graph_name }}</li>
       <li>Keyword 1: {{ graph.keyword_1 }}</li>
       <li>Keyword 2: {{ graph.keyword_2 }}</li>
-    {% endfor %}
-
 </ul>
+</div>
+<div style="width: auto; float: left">
+  <form role="form" action="/delete_graph" method="POST" id="delete_graph">
+    <div style="float: left; padding-left: 15px">
+    <input type="hidden" value="{{ graph.id }}" name="deleted_graph_id"/>
+    <input type="submit" class="btn" name="delete_graph" value="Delete Graph"/>
+    </div>
+  </form>
+</div>
+</div>
+{% endfor %}
 
 <p>All fields must have values to submit.</p>
 
@@ -21,7 +32,7 @@
   <div class="form-group">
   <div style="float: left;">
   <label>Graph Name</label>
-  <input ytpe="text" class="form-control" style="width: 172px; margin-right: 15px" name="graph_name"/>
+  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="graph_name"/>
   </div>
   <div style="float: left;">
   <label>Keyword 1</label>
