@@ -6,6 +6,7 @@
 {% set active_page = active_page|default('index') -%}
 {% if active_page == 'index' %}
 {% set navigation_bar = [
+    ('/graph', 'graphs', 'Graphs'),
     ('/contact', 'contact', 'Contact'),
     ('/about', 'about', 'About'),
             ('/jobs', 'jobs', 'Jobs'),
@@ -13,6 +14,7 @@
 ] -%}
 {% else %}
 {% set navigation_bar = [
+    ('/graph', 'graphs', 'Graphs'),
     ('/contact', 'contact', 'Contact'),
     ('/about', 'about', 'About'),
         ('/jobs', 'jobs', 'Jobs'),
@@ -22,7 +24,8 @@
 {% endif %}
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 
 {% block navbar %}

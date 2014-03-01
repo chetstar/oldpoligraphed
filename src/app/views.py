@@ -2,68 +2,78 @@ from app import app, db, lm, oid
 from apikey import _API_KEY
 import requests
 import json
-from forms import LoginForm
+from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph
 from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
-
-@app.route('/add', methods=['POST'])
-def save_graph():
-    user_id = 999
-    #replace with functioning user ID
-    if request.form['graph_name'] and request.form['keyword_1'] and request.form['keyword_2']:
-        save_graph = SavedGraph(
-            user_id=user_id,
-            graph_name=request.form['graph_name'],
-            keyword_1=request.form['keyword_1'],
-            keyword_2=request.form['keyword_2'])
-        db.session.add(save_graph)
-        db.session.commit()
-        return redirect(url_for('graph'))
-    return "Must complete all form fields."
-
-
-@app.route('/submit_graph', methods=['POST'])
-def submit_graph():
+@app.route('/graph', methods=['GET', 'POST'])
+@login_required
+def graph():
+    user = g.user
+    form_keywords = None
+    saved_graphs = None
+    api_results = None
+    deleted_graph_id = None
+    deleted_graph = None
     API_KEY = _API_KEY
-    form_keywords = [
-        request.form['graph_keyword_1'],
-        request.form['graph_keyword_2']]
+    keyword_form = KeywordSearchForm(prefix="keyword_form")
+    saved_graph_form = SavedGraphForm(prefix="saved_graph_form")
+    saved_graphs_query = SavedGraph.query.filter_by(user_id = user.id)
+    if saved_graphs_query:
+        saved_graphs = saved_graphs_query
+    delete_graph_form = DeleteGraph(prefix="delete_graph_form")
 
-    api_results = {}
-    for keyword in form_keywords:
-        query_params = {'apikey': API_KEY,
+    #If the keyword form is submitted
+
+    if keyword_form.validate_on_submit() and keyword_form.submit.data:
+
+        form_keywords = [
+            keyword_form.keyword_1.data,
+            keyword_form.keyword_2.data]
+
+        api_results = {}
+        for keyword in form_keywords:
+
+            query_params = {'apikey': API_KEY,
                         'phrase': keyword,
                         'start_date': '2014-01-06',
                         'end_date': '2014-01-11',
                         'granularity': 'day'
                         }
 
-        endpoint = 'http://capitolwords.org/api/dates.json'
+            endpoint = 'http://capitolwords.org/api/dates.json'
 
-        response = requests.get(endpoint, params=query_params)
-        json_data = json.loads(response.text)
+            response = requests.get(endpoint, params=query_params)
+            json_data = json.loads(response.text)
 
-        keyword_results = []
-        for item in json_data['results']:
-            keyword_results.append({item['day']: item['count']})
+            keyword_results = []
+            for item in json_data['results']:
+                keyword_results.append({item['day']: item['count']})
 
-        api_results[keyword] = keyword_results
+            api_results[keyword] = keyword_results
+        return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results, user=user, keyword_form=keyword_form, saved_graph_form=saved_graph_form, delete_graph_form = delete_graph_form )
 
-    saved_graphs = SavedGraph.query.all()
-    return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results)
+    if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
+        save_graph = SavedGraph(
+            graph_name = saved_graph_form.graph_name.data,
+            keyword_1 = saved_graph_form.keyword_1.data,
+            keyword_2 = saved_graph_form.keyword_2.data,
+            user_id = user.id
+            )
+        db.session.add(save_graph)
+        db.session.commit()
+        return redirect(url_for('graph'))
 
+    if delete_graph_form.validate_on_submit() and delete_graph_form.submit.data:
+        deleted_graph_id = delete_graph_form.graph_id.data
+        deleted_graph = db.session.query(SavedGraph).filter_by(id=deleted_graph_id).first()
+        db.session.delete(deleted_graph)
+        db.session.commit()
+        return redirect(url_for('graph'))
 
-@app.route('/delete_graph', methods=['POST'])
-def delete_graph():
-    deleted_graph_id = request.form['deleted_graph_id']
-    # deleted_graph_id = 1
-    deleted_graph = db.session.query(SavedGraph).filter_by(id=deleted_graph_id).first()
-    db.session.delete(deleted_graph)
-    db.session.commit()
-    return redirect(url_for('graph'))
-
+    return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results, user=user, keyword_form=keyword_form, saved_graph_form=saved_graph_form, delete_graph_form = delete_graph_form )
+    # return redirect(url_for('test_save_graph'))
 
 @app.route('/')
 @app.route('/index')
@@ -77,16 +87,13 @@ def index():
 def about():
     return render_template('about.html')
 
-
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html')
 
-
 @app.route('/donations')
 def donations():
     return render_template('donations.html')
-
 
 @app.route('/contact')
 def contact():
@@ -140,9 +147,3 @@ def after_login(resp):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
-
-
-@app.route('/graph')
-def graph():
-    saved_graphs = SavedGraph.query.all()
-    return render_template('graph.html', saved_graphs=saved_graphs)

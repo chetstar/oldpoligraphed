@@ -1,8 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Graphs{% endblock %}
+{% import "bootstrap/wtf.html" as wtf %}”
+{% set active_page = "graphs" %}
 
 {% block page_content %}
+
 <h2>Saved Graphs</h2>
+{% if  saved_graphs%}
 {% for graph in saved_graphs %}
 <div style="width: 100%; float: left">
 <div style="width: 200px; float: left">
@@ -15,55 +18,42 @@
 </ul>
 </div>
 <div style="width: auto; float: left">
-<div style="width: 100%; float: left; padding-bottom: 15px">
-<form role="form" action="/submit_graph" method="POST" id="submit_graph">
-  <div style="float: left; padding-left: 15px">
-  <input type="hidden" value="{{ graph.keyword_1 }}" name="graph_keyword_1"/>
-  <input type="hidden" value="{{ graph.keyword_2 }}" name="graph_keyword_2"/>
-  <div style="float: left;">
-  <input type="submit" class="btn" name="submit_graph_api" value="Graph!"/>
-  </div>
-  </div>
+<div style="width: 100%; float: left; padding-bottom: 15px" >
+<form class="form form-inline keyword_search_saved_graph" method="post" role="keyword_form">
+    {{ keyword_form.hidden_tag() }}
+    {{ wtf.form_errors(keyword_form, hiddens="only") }}
+    {{ wtf.form_field(keyword_form.keyword_1, value=graph.keyword_1, type="hidden") }}
+    {{ wtf.form_field(keyword_form.keyword_2, value=graph.keyword_2, type="hidden") }}
+    {{ keyword_form.submit(class="btn btn-default") }}
 </form>
 </div>
 
 <div style="width: 100%; float: left padding-bottom: 15px">
-  <form role="form" action="/delete_graph" method="POST" id="delete_graph">
-    <div style="float: left; padding-left: 15px">
-    <input type="hidden" value="{{ graph.id }}" name="deleted_graph_id"/>
-    <input type="submit" class="btn" name="delete_graph" value="Delete Graph"/>
-    </div>
-  </form>
+<form class="form form-inline delete_graph" method="post" role="delete_graph_form">
+    {{ delete_graph_form.hidden_tag() }}
+    {{ wtf.form_errors(delete_graph_form, hiddens="only") }}
+    {{ wtf.form_field(delete_graph_form.graph_id, value=graph.id, type="hidden") }}
+    {{ delete_graph_form.submit(class="btn btn-danger") }}
+</form>
 </div>
 </div>
 </div>
 {% endfor %}
+{% endif %}
 
-<p>All fields must have values to submit.</p>
+<form class="form form-inline" method="post" role="save_form">
+    {{ saved_graph_form.hidden_tag() }}
+    {{ wtf.form_errors(saved_graph_form, hiddens="only") }}
 
-<div style="width: 100%; float: left">
-<form role="form" action="/add" method="POST" id="save_graph">
-  <div class="form-group">
-  <div style="float: left;">
-  <label>Graph Name</label>
-  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="graph_name"/>
-  </div>
-  <div style="float: left;">
-  <label>Keyword 1</label>
-  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="keyword_1"/>
-  </div>
-  <div style="float: left;">
-  <label>Keyword 2</label>
-  <input type="text" class="form-control" style="width: 172px; margin-right: 15px" name="keyword_2"/>
-  </div>
-  <div style="float: left; padding-top: 25px">
-  <input type="submit" class="btn" name="save_graph_submit" value="Save Graph!"/>
-  </div>
-</div>
+    {{ wtf.form_field(saved_graph_form.graph_name) }}
+    {{ wtf.form_field(saved_graph_form.keyword_1) }}
+    {{ wtf.form_field(saved_graph_form.keyword_2) }}
+
+    {{ saved_graph_form.submit(class="btn btn-default") }}
 </form>
-</div>
 
-<div style="width: 100%; float: left">
+
+
 <h2>Graph Data</h2>
   {% if graph %}
       <div style="width: 100%; float:left; padding-bottom: 15px">
@@ -79,23 +69,7 @@
       {% endfor %}
     </div>
   {% endif %}
-<div style="height:auto; width: 100%; float:left">
-<div style="height:auto; width: 100%; float:left">
-<form role="form" action="/submit_graph" method="POST" id="submit_graph">
-  <div style="float: left; margin-right: 15px">
-  <label>API Keyword 1</label>
-  <input type="text" class="form-control" style="width: 172px" name="graph_keyword_1"/>
-  </div>
-  <div style="float: left; margin-right: 15px">
-  <label>API Keyword 2</label>
-  <input type="text" class="form-control" style="width: 172px" name="graph_keyword_2"/>
-  </div>
-  <div style="float: left;">
-  <div style="float: left; padding-top: 25px">
-  <input type="submit" class="btn" name="submit_graph_api" value="Graph!"/>
-  </div>
-  </div>
-</form>
-</div>
-</div>
+
+{{ wtf.quick_form(keyword_form) }}
+
 {% endblock %}

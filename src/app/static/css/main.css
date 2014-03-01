@@ -1,0 +1,11 @@
+.keyword_search_saved_graph .form-group, .delete_graph .form-group{
+    display: none;
+}
+
+.form-group label{
+    display: block;
+}
+
+.btn{
+    vertical-align: bottom;
+}
