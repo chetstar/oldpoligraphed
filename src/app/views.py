@@ -2,7 +2,7 @@ from app import app, db, lm, oid
 from apikey import _API_KEY
 import requests
 import json
-from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph
+from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph, EditForm
 from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -153,3 +153,13 @@ def after_login(resp):
 @login_required
 def edit():
     form = EditForm(g.user.nickname)
+    if form.validate_on_submit():
+        g.user.nickname = form.nickname.data
+        db.session.add(g.user)
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit'))
+    elif request.method != "POST":
+        form.nickname.data = g.user.nickname
+    return render_template('edit.html',
+        form = form)
