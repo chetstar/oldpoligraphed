@@ -3,12 +3,14 @@
 {% block page_content %}
 <!-- extend base layout -->
 
-
-<h1>Edit Your Profile</h1>
+           <h1>Hello {{g.user.nickname}}</h1>
+<br>
+<h1>Edit Your Nickname</h1>
 <form action="" method="post" name="edit">
     {{form.hidden_tag()}}
     <table>
         <tr>
+
             <td>Your nickname:</td>
             <td>
                 {{form.nickname(size = 24)}}
