@@ -33,4 +33,4 @@ MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
 # administrator list
-ADMINS = ['poligraphed@gmail.com']
+MAIL_ADMIN = os.environ.get('MAIL_ADMIN')

@@ -112,6 +112,8 @@ Export these variables to your environment so that the app can import sensitive 
 
 (venv) $ export MAIL_PASSWORD=<Gmail password>
 
+(venv) $ export MAIL_ADMIN=<your-email-address>
+
 Make sure there is no space between the '='
 
 ####
