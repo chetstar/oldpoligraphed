@@ -109,6 +109,7 @@ Mail Environment Variables
 Export these variables to your environment so that the app can import sensitive information from the environment.
 
 (venv) $ export MAIL_USERNAME=<Gmail username>
+
 (venv) $ export MAIL_PASSWORD=<Gmail password>
 
 Make sure there is no space between the '='
