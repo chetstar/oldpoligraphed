@@ -31,6 +31,9 @@ MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+MAIL_SUBJECT_PREFIX = '[Poligraphed]'
+MAIL_SENDER = 'Poligraphed poligraphed@gmail.com'
+
 
 # administrator list
 MAIL_ADMIN = os.environ.get('MAIL_ADMIN')
