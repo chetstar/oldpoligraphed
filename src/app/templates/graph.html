@@ -57,7 +57,7 @@
 <h2>Graph Data</h2>
   {% if graph %}
       <div style="width: 100%; float:left; padding-bottom: 15px">
-      {% for keyword, results in graph.iteritems() %}
+      {% for (keyword, results) in graph %}
       <div style="width: 172px; float:left; word-wrap: break-word; margin-right: 15px; text-wrap: unrestricted">
       Keyword: {{ keyword }}
         {% for dict in results %}

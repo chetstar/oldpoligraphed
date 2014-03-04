@@ -32,7 +32,7 @@ def graph():
             keyword_form.keyword_1.data,
             keyword_form.keyword_2.data]
 
-        api_results = {}
+        api_results = []
         for keyword in form_keywords:
 
             query_params = {'apikey': API_KEY,
@@ -51,7 +51,7 @@ def graph():
             for item in json_data['results']:
                 keyword_results.append({item['day']: item['count']})
 
-            api_results[keyword] = keyword_results
+            api_results.append((keyword, keyword_results))
         return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results, user=user, keyword_form=keyword_form, saved_graph_form=saved_graph_form, delete_graph_form = delete_graph_form )
 
     if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
