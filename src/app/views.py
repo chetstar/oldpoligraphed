@@ -6,6 +6,7 @@ from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph, Edi
 from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
+from email import send_email
 
 @app.route('/graph', methods=['GET', 'POST'])
 @login_required
@@ -146,6 +147,8 @@ def after_login(resp):
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
+        send_email(resp.email, 'Welcome to Poligraphed',
+            'mail/new_user')
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
