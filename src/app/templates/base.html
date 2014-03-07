@@ -80,3 +80,10 @@
 
 </div>
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script type=text/javascript>
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/testajax.js') }}"></script>
+{% endblock %}

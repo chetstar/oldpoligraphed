@@ -4,7 +4,7 @@ import requests
 import json
 from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph, EditForm
 from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from email import send_email
 
@@ -166,3 +166,25 @@ def edit():
         form.nickname.data = g.user.nickname
     return render_template('edit.html',
         form = form)
+
+@app.route('/_search_api')
+def _search_api():
+    API_KEY = _API_KEY
+    keyword1 = request.args.get('a', '', type=str)
+    # b = request.args.get('b', 0, type=int)
+    query_params = {'apikey': API_KEY,
+                'phrase': keyword1,
+                'start_date': '2014-01-06',
+                'end_date': '2014-01-11',
+                'granularity': 'day'
+                }
+
+    endpoint = 'http://capitolwords.org/api/dates.json'
+
+    response = requests.get(endpoint, params=query_params)
+    results = json.loads(response.text)
+    return jsonify(results)
+
+@app.route('/testajax')
+def test():
+    return render_template('testajax.html')
