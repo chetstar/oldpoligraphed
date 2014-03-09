@@ -73,3 +73,8 @@
 {{ wtf.quick_form(keyword_form) }}
 
 {% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/flot.js') }}"></script>
+{% endblock %}
