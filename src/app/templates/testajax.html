@@ -9,4 +9,14 @@
 <ul id="result"></ul>
 <p><a href="#" id="calculate">Submit</a>
 
+<div id="placeholder" style="width:600px;height:300px"></div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/flot.js') }}"></script>
+<script language="JavaScript" type="text/javascript">
+$.plot($("#placeholder"), [ [[0, 0], [1, 1]] ]);
+</script>
 {% endblock %}

@@ -7,6 +7,7 @@ from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from email import send_email
+from date_convert import javascript_timestamp
 
 @app.route('/graph', methods=['GET', 'POST'])
 @login_required
@@ -183,6 +184,9 @@ def _search_api():
 
     response = requests.get(endpoint, params=query_params)
     results = json.loads(response.text)
+    for result in results['results']:
+        result['day'] = javascript_timestamp(result['day'])
+
     return jsonify(results)
 
 @app.route('/testajax')
