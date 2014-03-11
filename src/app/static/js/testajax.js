@@ -1,23 +1,33 @@
   $(function() {
     var submit_form = function(e) {
-      var date_array = [];
+      var dates = [];
+      var more_dates = [];
       $.getJSON($SCRIPT_ROOT + '/_search_api', {
         a: $('input[name="a"]').val(),
-        // b: $('input[name="b"]').val()
+        b: $('input[name="b"]').val()
       }, function(data) {
+
         $("#result").empty();
-        for (var i in data.results) {
-          $('#result').append("<li>Was said " +
-            data.results[i].count +
+
+        for (var a in data.keywords) {
+          for (var b in data.keywords[a].results) {
+            $('#result').append("<li>" + a + " said " +
+            data.keywords[a].results[b].count +
             " times by politicians on " +
-            data.results[i].day +"</li>");
-          date_array.push([data.results[i].day,data.results[i].count]);
+            data.keywords[a].results[b].day +"</li>");
+            if (a === "0") {
+              dates.push([data.keywords[a].results[b].day, data.keywords[a].results[b].count]);
+            } else {
+              more_dates.push([data.keywords[a].results[b].day, data.keywords[a].results[b].count]);
+            }
+          }
         }
-        $("#keyword").text("The keyword " + $('input[name="a"]').val());
-        $.plot($("#placeholder"), [date_array], {xaxis: {
-    mode: "time",
-    timeformat: "%d"
-}}
+            $("#keyword").text($('input[name="a"]').val() + " vs. " + $('input[name="b"]').val());
+
+            $.plot($("#placeholder"), [dates, more_dates], {xaxis: {
+                mode: "time",
+                timeformat: "%d"
+            }}
           );
         $('#result').text(data.user);
         $('input[name=a]').focus().select();

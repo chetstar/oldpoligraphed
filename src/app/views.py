@@ -171,23 +171,27 @@ def edit():
 @app.route('/_search_api')
 def _search_api():
     API_KEY = _API_KEY
-    keyword1 = request.args.get('a', '', type=str)
-    # b = request.args.get('b', 0, type=int)
-    query_params = {'apikey': API_KEY,
-                'phrase': keyword1,
-                'start_date': '2014-01-06',
-                'end_date': '2014-01-11',
-                'granularity': 'day'
-                }
+    api_results = []
+    keywords = [ request.args.get('a', '', type = str),
+                        request.args.get('b', '', type = str)
+                       ]
+    for keyword in keywords:
+        query_params = {'apikey': API_KEY,
+                    'phrase': keyword,
+                    'start_date': '2014-01-01',
+                    'end_date': '2014-01-31',
+                    'granularity': 'day'
+                    }
 
-    endpoint = 'http://capitolwords.org/api/dates.json'
+        endpoint = 'http://capitolwords.org/api/dates.json'
 
-    response = requests.get(endpoint, params=query_params)
-    results = json.loads(response.text)
-    for result in results['results']:
-        result['day'] = javascript_timestamp(result['day'])
+        response = requests.get(endpoint, params=query_params)
+        results = json.loads(response.text)
+        for result in results['results']:
+            result['day'] = javascript_timestamp(result['day'])
+        api_results.append(results)
 
-    return jsonify(results)
+    return jsonify(keywords = api_results)
 
 @app.route('/testajax')
 def test():
