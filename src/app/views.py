@@ -8,6 +8,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from email import send_email
 from date_convert import javascript_timestamp
+from cw_api import cw_search_keywords
 
 @app.route('/graph', methods=['GET', 'POST'])
 @login_required
@@ -170,26 +171,12 @@ def edit():
 
 @app.route('/_search_api')
 def _search_api():
-    API_KEY = _API_KEY
-    api_results = []
+
     keywords = [ request.args.get('a', '', type = str),
                         request.args.get('b', '', type = str)
                        ]
-    for keyword in keywords:
-        query_params = {'apikey': API_KEY,
-                    'phrase': keyword,
-                    'start_date': '2014-01-01',
-                    'end_date': '2014-01-31',
-                    'granularity': 'day'
-                    }
 
-        endpoint = 'http://capitolwords.org/api/dates.json'
-
-        response = requests.get(endpoint, params=query_params)
-        results = json.loads(response.text)
-        for result in results['results']:
-            result['day'] = javascript_timestamp(result['day'])
-        api_results.append(results)
+    api_results = cw_search_keywords(keywords)
 
     return jsonify(keywords = api_results)
 
