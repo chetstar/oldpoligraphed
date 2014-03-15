@@ -43,5 +43,9 @@
       }
     });
 
+    $(window).resize(submit_form);
+
     $('input[name=a]').focus();
+
+
   });
