@@ -66,9 +66,9 @@ If installation is a pain try this
 
 $ pip install --allow-all-external --upgrade -r requirements.txt
 
-If you are getting the error "ImportError: No module named setuptools" see this walk through
+If you are getting the error "ImportError: No module named setuptools" see this ImportError_ fix
 
-.. _ImportError_fix: https://github.com/pypa/pip/issues/1064
+.. _ImportError: https://github.com/pypa/pip/issues/1064
 
 
 ####
