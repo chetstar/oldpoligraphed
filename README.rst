@@ -49,7 +49,7 @@ Update pip_ and then setuptools
 $ pip install --upgrade setuptools
 
 
-#create and activate the venv
+create and activate the venv
 
 open the main app directory
 
@@ -58,13 +58,18 @@ $ virtualenv .
 $ source bin/activate
 
 
-#pip install the requirements
+pip install the requirements
 
 $ pip install -r requirements.txt --upgrade
 
 If installation is a pain try this
 
 $ pip install --allow-all-external --upgrade -r requirements.txt
+
+If you are getting the error "ImportError: No module named setuptools" see this walk through
+
+.. _ImportError_fix: https://github.com/pypa/pip/issues/1064
+
 
 ####
 How to Setup the Database and Migrations
