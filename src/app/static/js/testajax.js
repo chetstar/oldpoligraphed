@@ -2,6 +2,7 @@
     var submit_form = function(e) {
       var dates = [];
       var more_dates = [];
+      $('.hidden-container').show();
       $.getJSON($SCRIPT_ROOT + '/_search_api', {
         a: $('input[name="a"]').val(),
         b: $('input[name="b"]').val()
@@ -29,6 +30,8 @@
                 timeformat: "%d"
             }}
           );
+
+        $('.hidden-container').hide();
         $('#result').text(data.user);
         $('input[name=a]').focus().select();
       });
@@ -47,5 +50,6 @@
 
     $('input[name=a]').focus();
 
+    $.plot($("#placeholder"), [[0,0]]);
 
   });

@@ -7,8 +7,22 @@
   <input name=b>
 <p><a href="#" id="calculate">Submit</a>
 <h1 id="keyword"></h1>
-<div id="placeholder" style="width:100%; height:300px"></div>
+<div class="graph-container">
+    <div class="hidden-container">
+        <div class="opaque-overlay"></div>
+        <div class="progress-container">
+            <p>Loading...</p>
+            <div class="progress progress-striped active" >
+              <div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span class="sr-only">100% Complete</span>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div id="placeholder" style="width:100%; height:300px"></div>
+</div>
 <ul id="result"></ul>
+
 
 {% endblock %}
 
