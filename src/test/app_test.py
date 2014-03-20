@@ -1,6 +1,6 @@
 import unittest
 import app.models
-from PyClass_API_Project.src.apikey import _API_KEY
+from apikey import _API_KEY
 from config import API_KEY
 
 class TestApp(unittest.TestCase):
