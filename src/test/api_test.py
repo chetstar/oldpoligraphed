@@ -1,6 +1,6 @@
 import requests
 import pprint
-from src.app.apikey import _API_KEY
+from src.apikey import _API_KEY
 
 API_KEY = _API_KEY
 
