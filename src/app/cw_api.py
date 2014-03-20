@@ -4,15 +4,15 @@ import json
 from date_convert import javascript_timestamp
 import datetime
 
-def cw_search_keywords(keywords):
+def cw_search_keywords(keywords, date_low, date_high, granularity):
     API_KEY = _API_KEY
     api_results = []
     for keyword in keywords:
         query_params = {'apikey': API_KEY,
                     'phrase': keyword,
-                    'start_date': '2014-01-01',
-                    'end_date': '2014-02-28',
-                    'granularity': 'day'
+                    'start_date': date_low,
+                    'end_date': date_high,
+                    'granularity': granularity
                     }
 
         endpoint = 'http://capitolwords.org/api/dates.json'

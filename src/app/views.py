@@ -172,11 +172,15 @@ def edit():
 @app.route('/_search_api')
 def _search_api():
 
-    keywords = [ request.args.get('a', '', type = str),
-                        request.args.get('b', '', type = str)
+    keywords = [ request.args.get('keyword_1', '', type = str),
+                        request.args.get('keyword_2', '', type = str)
                        ]
 
-    api_results = cw_search_keywords(keywords)
+    date_low = request.args.get('date_low', '', type = str)
+    date_high = request.args.get('date_high', '', type = str)
+    granularity = request.args.get('granularity', '', type = str)
+
+    api_results = cw_search_keywords(keywords, date_low, date_high, granularity)
 
     return jsonify(keywords = api_results)
 

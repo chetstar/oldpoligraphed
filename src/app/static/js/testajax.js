@@ -3,9 +3,15 @@
       var dates = [];
       var more_dates = [];
       $('.hidden-container').show();
+
       $.getJSON($SCRIPT_ROOT + '/_search_api', {
-        a: $('input[name="a"]').val(),
-        b: $('input[name="b"]').val()
+
+        keyword_1: $('input[name="keyword_1"]').val(),
+        keyword_2: $('input[name="keyword_2"]').val(),
+        date_low: $('input[name="date_low"]').val(),
+        date_high: $('input[name="date_high"]').val(),
+        granularity: $('input[name="granularity"]').val()
+
       }, function(data) {
 
         $("#result").empty();
@@ -16,6 +22,7 @@
             data.keywords[a].results[b].count +
             " times by politicians on " +
             data.keywords[a].results[b].day +"</li>");
+
             if (a === "0") {
               dates.push([data.keywords[a].results[b].day, data.keywords[a].results[b].count]);
             } else {
@@ -23,12 +30,39 @@
             }
           }
         }
-            $("#keyword").text($('input[name="a"]').val() + " vs. " + $('input[name="b"]').val());
+            $("#keyword").text($('input[name="keyword_1"]').val() + " vs. " + $('input[name="keyword_2"]').val());
 
-            $.plot($("#placeholder"), [dates, more_dates], {xaxis: {
-                mode: "time",
-                timeformat: "%d"
-            }}
+            $.plot($("#placeholder"),
+              [ { label: $('input[name="keyword_1"]').val(), data: dates },
+                { label: $('input[name="keyword_2"]').val(), data: more_dates }
+              ],
+              { xaxis: {
+                  mode: "time",
+                  timeformat: "%d"
+                },
+                lines: {
+                  show: true
+                },
+                points: {
+                  show: true
+                },
+              grid: {
+                hoverable: true,
+                clickable: true
+              },
+              legend: {
+                  show: true,
+                  // labelFormatter: null or (fn: string, series object -> string)
+                  // labelBoxBorderColor: #000,
+                  // noColumns: number
+                  position: "ne",
+                  // margin: number of pixels or [x margin, y margin]
+                  backgroundColor: "white",
+                  backgroundOpacity: .5
+                  // container: null or jQuery object/DOM element/jQuery expression
+                  // sorted: null/false, true, "ascending", "descending", "reverse", or a comparator
+              }
+            }
           );
 
         $('.hidden-container').hide();
