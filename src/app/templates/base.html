@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Poligraphed{% endblock %}
 
 
 {% set active_page = active_page|default('index') -%}
@@ -9,17 +9,17 @@
     ('/graph', 'graphs', 'Graphs'),
     ('/contact', 'contact', 'Contact'),
     ('/about', 'about', 'About'),
-            ('/jobs', 'jobs', 'Jobs'),
-                ('/donations', 'donations', 'Donations')
+    ('/jobs', 'jobs', 'Jobs'),
+    ('/donations', 'donations', 'Donations')
 ] -%}
 {% else %}
 {% set navigation_bar = [
     ('/graph', 'graphs', 'Graphs'),
     ('/contact', 'contact', 'Contact'),
     ('/about', 'about', 'About'),
-        ('/jobs', 'jobs', 'Jobs'),
-            ('/donations', 'donations', 'Donations'),
-        ('/', 'index', 'Home')
+    ('/jobs', 'jobs', 'Jobs'),
+    ('/donations', 'donations', 'Donations'),
+    ('/', 'index', 'Home')
 ] -%}
 {% endif %}
 {% block head %}
@@ -57,29 +57,53 @@
     </ul>
     {% endif %}
     {% endwith %}
+
 {% block content %}
 <div class="container-fluid">
-
   <div class="row">
-
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-{% for href, id, caption in navigation_bar %}
-  <li{% if id == active_page %} class="active"{% endif
-  %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
-{% endfor %}
-</ul>
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            {% for href, id, caption in navigation_bar %}
+            <li{% if id == active_page %}
+            class="active"
+            {% endif%}>
+            <a href="{{ href|e }}">{{ caption|e }}</a></li>
+            {% endfor %}
+        </ul>
+        {% if  saved_graphs%}
+        {% for graph in saved_graphs %}
+        <div style="width: 100%; float: left; overflow: hidden">
+        <div style="width: 100%; float: left">
+        <form class="form form-inline keyword_search_saved_graph" method="post" role="keyword_form">
+        {{ keyword_form.hidden_tag() }}
+        {{ wtf.form_errors(keyword_form, hiddens="only") }}
+        {{ wtf.form_field(keyword_form.keyword_1, value=graph.keyword_1, type="hidden") }}
+        {{ wtf.form_field(keyword_form.keyword_2, value=graph.keyword_2, type="hidden") }}
+        {{ keyword_form.submit(class="btn btn-default", value=graph.graph_name) }}
+        </form>
         </div>
+        <div style="width: 100%; float: left">
+        <form class="form form-inline delete_graph" method="post" role="delete_graph_form">
+        <span class="glyphicon glyphicon-remove"></span>
+        {{ delete_graph_form.hidden_tag() }}
+        {{ wtf.form_errors(delete_graph_form, hiddens="only") }}
+        {{ wtf.form_field(delete_graph_form.graph_id, value=graph.id, type="hidden") }}
+        {{ delete_graph_form.submit(class="btn btn-danger") }}
+        </form>
+        </div>
+        </div>
+        {% endfor %}
+        {% endif %}
 
+    </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     {% block page_content %}
     {% endblock %}
-    </div>
-
+    </div>  
   </div>
-
 </div>
 {% endblock %}
+
 {% block scripts %}
 {{ super() }}
 <script type=text/javascript>
