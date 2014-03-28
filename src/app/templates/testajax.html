@@ -8,13 +8,35 @@
 {% block page_content %}
 
 <h1>AJAX Example</h1>
-<p>
-  <input name='keyword_1'>
-  <input name='keyword_2'>
-  <input name='date_low'>
-  <input name='date_high'>
-  <input name='granularity'>
-<p><a href="#" id="calculate">Submit</a>
+<form class="form-inline" role="form">
+  <div class="form-group">
+    <label class="sr-only" for="keyword_1">Email address</label>
+    <input name='keyword_1' class="form-control" id="keyword_1" placeholder="Keyword 1">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="keyword_2">Email address</label>
+    <input name='keyword_2' class="form-control" id="keyword_2" placeholder="Keyword 2">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="date_low">Email address</label>
+    <input type="date" name='date_low' class="form-control" id="date_low" placeholder="Start Date">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="date_high">Email address</label>
+    <input type="date" name='date_high' class="form-control" id="date_high" placeholder="End Date">
+  </div>
+  <div class="form-group">
+    <select name='granularity' id="granularity"  class="form-control">
+        <option value="Day">Day</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div class="">
+      <button type="submit" id="calculate" class="btn btn-danger">Submit</button>
+    </div>
+  </div>
+</form>
 <h1 id="keyword"></h1>
 <div class="graph-container">
     <div class="hidden-container">

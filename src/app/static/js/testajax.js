@@ -72,7 +72,7 @@
       return false;
     };
 
-    $('a#calculate').bind('click', submit_form);
+    $('#calculate').bind('click', submit_form);
 
     $('input[type=text]').bind('keydown', function(e) {
       if (e.keyCode == 13) {

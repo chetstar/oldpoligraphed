@@ -20,7 +20,7 @@ def cw_search_keywords(keywords, date_low, date_high, granularity):
         response = requests.get(endpoint, params=query_params)
         if response.status_code == 200:
             results = json.loads(response.text)
-            results_entire_range = add_all_days('2014-01-01', '2014-02-28', results)
+            results_entire_range = add_all_days(date_low, date_high, results)
             for result in results_entire_range['results']:
                 result['day'] = javascript_timestamp(result['day'])
             api_results.append(results)
