@@ -12,6 +12,16 @@ $(function() {
     var submit_form = function(e) {
       var dates = [];
       var more_dates = [];
+
+      //Set timeformat based on granularity
+      if ($('select[name="granularity"]').val() == 'Day'){
+        timeformat = "%m/%d";
+      } else if($('select[name="granularity"]').val() == 'Month'){
+        timeformat = "%m/%y";
+      } else if($('select[name="granularity"]').val() == 'Year'){
+        timeformat = "%y";
+      }
+
       $('.hidden-container').show();
 
       $.getJSON($SCRIPT_ROOT + '/_search_api', {
@@ -20,7 +30,7 @@ $(function() {
         keyword_2: $('input[name="keyword_2"]').val(),
         date_low: $('input[name="date_low"]').val(),
         date_high: $('input[name="date_high"]').val(),
-        granularity: $('input[name="granularity"]').val()
+        granularity: $('select[name="granularity"]').val()
 
       }, function(data) {
 
@@ -48,7 +58,7 @@ $(function() {
               ],
               { xaxis: {
                   mode: "time",
-                  timeformat: "%d"
+                  timeformat: timeformat
                 },
                 lines: {
                   show: true
