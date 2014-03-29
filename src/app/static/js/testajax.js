@@ -1,4 +1,14 @@
-  $(function() {
+$(function() {
+
+    var date_value_input = function(input, days_back) {
+        var now = new Date();
+        now.setDate(now.getDate() - days_back);
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        input.val(today);
+    };
+
     var submit_form = function(e) {
       var dates = [];
       var more_dates = [];
@@ -85,5 +95,8 @@
     $('input[name=a]').focus();
 
     $.plot($("#placeholder"), [[0,0]]);
+
+   date_value_input($('#date_low'), 30);
+   date_value_input($('#date_high'), 0);
 
   });
