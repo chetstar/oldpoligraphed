@@ -20,35 +20,55 @@ def cw_search_keywords(keywords, date_low, date_high, granularity):
         response = requests.get(endpoint, params=query_params)
         if response.status_code == 200:
             results = json.loads(response.text)
-            results_entire_range = add_all_days(date_low, date_high, results)
-            for result in results_entire_range['results']:
-                result['day'] = javascript_timestamp(result['day'])
+            if granularity == 'day':
+                results_entire_range = add_all(date_low, date_high, results, granularity="day")
+                for result in results_entire_range['results']:
+                    result['day'] = javascript_timestamp(result['day'], granularity)
+            elif granularity == 'month':
+                results_entire_range = add_all(date_low, date_high, results, granularity="month")
+                for result in results_entire_range['results']:
+                    result['month'] = javascript_timestamp(result['month'], granularity)
             api_results.append(results)
 
     return api_results
 
-def add_all_days(start_date, end_date, result):
+def add_all(start_date, end_date, result, granularity):
 
     '''Function is used to add days with no results back into the list of results
        so that the graph will plot a point of 0 for that day.'''
+
+    if granularity == 'day':
+        date_format = '%Y-%m-%d'
+    elif granularity == 'month':
+        date_format = '%Y%m'
 
     date_low = datetime.datetime.strptime(start_date, '%Y-%m-%d')
     date_high = datetime.datetime.strptime(end_date, '%Y-%m-%d')
 
     returned_dates = []
     for i in result['results']:
-       returned_dates.append(datetime.datetime.strptime(i['day'], '%Y-%m-%d'))
+       returned_dates.append(datetime.datetime.strptime(i[granularity], date_format))
+    if granularity == 'day':
+        for i in range((date_high - date_low).days + 1):
+            date =  date_low + datetime.timedelta(i)
+            date_string = date.strftime(date_format)
+            if date not in returned_dates:
+                no_result = {"count": 0,
+                                    granularity: date_string,
+                                    }
+                result['results'].insert(i, no_result)
 
-    for i in range((date_high - date_low).days + 1):
-        date =  date_low + datetime.timedelta(i)
-        date_string = date.strftime('%Y-%m-%d')
-        if date not in returned_dates:
-            no_result = {"count": 0,
-                                "percentage": 0,
-                                "total": 0,
-                                "day": date_string,
-                                "raw_count": 0
-                                }
-            result['results'].insert(i, no_result)
+    elif granularity == 'month':
+        ym_start= 12*date_low.year + date_low.month - 1
+        ym_end= 12*date_high.year + date_high.month - 1
+        for ym in range( ym_start, ym_end + 1):
+            y, m = divmod( ym, 12 )
+            date = datetime.datetime(y, m + 1, 1)
+            date_string = date.strftime(date_format)
+            if date not in returned_dates:
+                no_result = {"count": 0,
+                                    granularity: date_string,
+                                    }
+                result['results'].insert(ym - ym_start, no_result)
 
     return result

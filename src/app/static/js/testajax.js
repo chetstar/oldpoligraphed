@@ -14,12 +14,15 @@ $(function() {
       var more_dates = [];
 
       //Set timeformat based on granularity
-      if ($('select[name="granularity"]').val() == 'Day'){
+      if ($('select[name="granularity"]').val() == 'day'){
         timeformat = "%m/%d";
-      } else if($('select[name="granularity"]').val() == 'Month'){
+        granularity = 'day';
+      } else if($('select[name="granularity"]').val() == 'month'){
         timeformat = "%m/%y";
-      } else if($('select[name="granularity"]').val() == 'Year'){
+        granularity = 'month';
+      } else if($('select[name="granularity"]').val() == 'year'){
         timeformat = "%y";
+        granularity = 'year';
       }
 
       $('.hidden-container').show();
@@ -44,9 +47,9 @@ $(function() {
             data.keywords[a].results[b].day +"</li>");
 
             if (a === "0") {
-              dates.push([data.keywords[a].results[b].day, data.keywords[a].results[b].count]);
+              dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
             } else {
-              more_dates.push([data.keywords[a].results[b].day, data.keywords[a].results[b].count]);
+              more_dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
             }
           }
         }
