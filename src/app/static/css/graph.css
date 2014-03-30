@@ -32,3 +32,8 @@
 .legend table {
     border-spacing: 5px;
 }
+
+.legendLabel{
+    font-size: 14px;
+    padding-left: 3px;
+}
