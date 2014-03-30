@@ -7,8 +7,8 @@ from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from email import send_email
-from date_convert import javascript_timestamp
 from cw_api import cw_search_keywords
+
 
 @app.route('/graph', methods=['GET', 'POST'])
 @login_required
@@ -22,7 +22,7 @@ def graph():
     API_KEY = _API_KEY
     keyword_form = KeywordSearchForm(prefix="keyword_form")
     saved_graph_form = SavedGraphForm(prefix="saved_graph_form")
-    saved_graphs_query = SavedGraph.query.filter_by(user_id = user.id)
+    saved_graphs_query = SavedGraph.query.filter_by(user_id=user.id)
     if saved_graphs_query:
         saved_graphs = saved_graphs_query
     delete_graph_form = DeleteGraph(prefix="delete_graph_form")
@@ -39,11 +39,11 @@ def graph():
         for keyword in form_keywords:
 
             query_params = {'apikey': API_KEY,
-                        'phrase': keyword,
-                        'start_date': '2014-01-06',
-                        'end_date': '2014-01-11',
-                        'granularity': 'day'
-                        }
+                            'phrase': keyword,
+                            'start_date': '2014-01-06',
+                            'end_date': '2014-01-11',
+                            'granularity': 'day'
+                            }
 
             endpoint = 'http://capitolwords.org/api/dates.json'
 
@@ -55,15 +55,18 @@ def graph():
                 keyword_results.append({item['day']: item['count']})
 
             api_results.append((keyword, keyword_results))
-        return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results, user=user, keyword_form=keyword_form, saved_graph_form=saved_graph_form, delete_graph_form = delete_graph_form )
+        return render_template('graph.html',
+                               saved_graphs=saved_graphs, graph=api_results,
+                               user=user, keyword_form=keyword_form,
+                               saved_graph_form=saved_graph_form,
+                               delete_graph_form=delete_graph_form)
 
     if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
-        save_graph = SavedGraph(
-            graph_name = saved_graph_form.graph_name.data,
-            keyword_1 = saved_graph_form.keyword_1.data,
-            keyword_2 = saved_graph_form.keyword_2.data,
-            user_id = user.id
-            )
+        save_graph = SavedGraph(graph_name=saved_graph_form.graph_name.data,
+                                keyword_1=saved_graph_form.keyword_1.data,
+                                keyword_2=saved_graph_form.keyword_2.data,
+                                user_id=user.id
+                                )
         db.session.add(save_graph)
         db.session.commit()
         return redirect(url_for('graph'))
@@ -75,8 +78,13 @@ def graph():
         db.session.commit()
         return redirect(url_for('graph'))
 
-    return render_template('graph.html', saved_graphs=saved_graphs, graph=api_results, user=user, keyword_form=keyword_form, saved_graph_form=saved_graph_form, delete_graph_form = delete_graph_form )
-    # return redirect(url_for('test_save_graph'))
+    return render_template('graph.html',
+                           saved_graphs=saved_graphs, graph=api_results,
+                           user=user, keyword_form=keyword_form,
+                           saved_graph_form=saved_graph_form,
+                           delete_graph_form=delete_graph_form)
+    return redirect(url_for('test_save_graph'))
+
 
 @app.route('/')
 @app.route('/index')
@@ -90,13 +98,16 @@ def index():
 def about():
     return render_template('about.html')
 
+
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html')
 
+
 @app.route('/donations')
 def donations():
     return render_template('donations.html')
+
 
 @app.route('/contact')
 def contact():
@@ -117,7 +128,8 @@ def login():
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
         return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-    return render_template('login.html', title='Sign In', form=form, providers=app.config['OPENID_PROVIDERS'])
+    return render_template('login.html', title='Sign In', form=form,
+                           providers=app.config['OPENID_PROVIDERS'])
 
 
 @app.route('/logout')
@@ -149,12 +161,12 @@ def after_login(resp):
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
-        send_email(resp.email, 'Welcome to Poligraphed',
-            'mail/new_user')
+        send_email(resp.email, 'Welcome to Poligraphed', 'mail/new_user')
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
-@app.route('/edit', methods = ['GET', 'POST'])
+
+@app.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit():
     form = EditForm(g.user.nickname)
@@ -166,24 +178,58 @@ def edit():
         return redirect(url_for('edit'))
     elif request.method != "POST":
         form.nickname.data = g.user.nickname
-    return render_template('edit.html',
-        form = form)
+    return render_template('edit.html', form=form)
+
 
 @app.route('/_search_api')
 def _search_api():
 
-    keywords = [ request.args.get('keyword_1', '', type = str),
-                        request.args.get('keyword_2', '', type = str)
-                       ]
+    keywords = [request.args.get('keyword_1', '', type=str),
+                request.args.get('keyword_2', '', type=str)
+                ]
 
-    date_low = request.args.get('date_low', '', type = str)
-    date_high = request.args.get('date_high', '', type = str)
-    granularity = request.args.get('granularity', '', type = str)
+    date_low = request.args.get('date_low', '', type=str)
+    date_high = request.args.get('date_high', '', type=str)
+    granularity = request.args.get('granularity', '', type=str)
 
     api_results = cw_search_keywords(keywords, date_low, date_high, granularity)
 
-    return jsonify(keywords = api_results)
+    return jsonify(keywords=api_results)
 
-@app.route('/testajax')
+
+@app.route('/testajax', methods=['GET', 'POST'])
+@login_required
 def test():
-    return render_template('testajax.html')
+    user = g.user
+    saved_graphs = None
+    deleted_graph_id = None
+    deleted_graph = None
+    keyword_form = KeywordSearchForm(prefix="keyword_form")
+    saved_graph_form = SavedGraphForm(prefix="saved_graph_form")
+    saved_graphs_query = SavedGraph.query.filter_by(user_id=user.id)
+    if saved_graphs_query:
+        saved_graphs = saved_graphs_query
+    delete_graph_form = DeleteGraph(prefix="delete_graph_form")
+
+    if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
+        save_graph = SavedGraph(graph_name=saved_graph_form.graph_name.data,
+                                keyword_1=saved_graph_form.keyword_1.data,
+                                keyword_2=saved_graph_form.keyword_2.data,
+                                user_id=user.id
+                                )
+        db.session.add(save_graph)
+        db.session.commit()
+        return redirect(url_for('test'))
+
+    if delete_graph_form.validate_on_submit() and delete_graph_form.submit.data:
+        deleted_graph_id = delete_graph_form.graph_id.data
+        deleted_graph = db.session.query(SavedGraph).filter_by(id=deleted_graph_id).first()
+        db.session.delete(deleted_graph)
+        db.session.commit()
+        return redirect(url_for('test'))
+
+    return render_template('testajax.html',
+                           saved_graphs=saved_graphs,
+                           user=user, keyword_form=keyword_form,
+                           saved_graph_form=saved_graph_form,
+                           delete_graph_form=delete_graph_form)
