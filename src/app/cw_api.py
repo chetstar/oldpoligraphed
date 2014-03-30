@@ -28,7 +28,12 @@ def cw_search_keywords(keywords, date_low, date_high, granularity):
                 results_entire_range = add_all(date_low, date_high, results, granularity="month")
                 for result in results_entire_range['results']:
                     result['month'] = javascript_timestamp(result['month'], granularity)
+            elif granularity == 'year':
+                results_entire_range = add_all(date_low, date_high, results, granularity="year")
+                for result in results_entire_range['results']:
+                    result['year'] = javascript_timestamp(result['year'], granularity)
             api_results.append(results)
+
 
     return api_results
 
@@ -41,6 +46,8 @@ def add_all(start_date, end_date, result, granularity):
         date_format = '%Y-%m-%d'
     elif granularity == 'month':
         date_format = '%Y%m'
+    elif granularity == 'year':
+        date_format = '%Y'
 
     date_low = datetime.datetime.strptime(start_date, '%Y-%m-%d')
     date_high = datetime.datetime.strptime(end_date, '%Y-%m-%d')
@@ -70,5 +77,17 @@ def add_all(start_date, end_date, result, granularity):
                                     granularity: date_string,
                                     }
                 result['results'].insert(ym - ym_start, no_result)
+
+    elif granularity == 'year':
+        year_start = date_low.year
+        year_end = date_high.year
+        for year in range(year_start, year_end):
+            date = datetime.datetime(year, 1, 1)
+            date_string = date.strftime(date_format)
+            if date not in returned_dates:
+                no_result = {"count": 0,
+                                    granularity: date_string,
+                                    }
+                result['results'].insert(year - year_start, no_result)
 
     return result

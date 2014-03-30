@@ -7,6 +7,8 @@ def javascript_timestamp(date, granularity):
         date_format = '%Y-%m-%d'
     elif granularity == 'month':
         date_format = '%Y%m'
+    elif granularity == 'year':
+        date_format = '%Y'
 
     dt = datetime.datetime.strptime(date, date_format)
     """Multiply by 1000 for flot. Flot time series data is
