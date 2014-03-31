@@ -16,10 +16,10 @@ $(function() {
 
       //Set timeformat based on granularity
       if ($('select[name="granularity"]').val() == 'day'){
-        timeformat = "%b/%e";
+        timeformat = "%b %e";
         granularity = 'day';
       } else if($('select[name="granularity"]').val() == 'month'){
-        timeformat = "%b/%Y";
+        timeformat = "%b %Y";
         granularity = 'month';
       } else if($('select[name="granularity"]').val() == 'year'){
         timeformat = "%Y";
@@ -42,25 +42,26 @@ $(function() {
 
         //Flot adds multiple ticks for months when less than or equal to 8 month/year points
         for (var a in data.keywords) {
-          if (data.keywords[a].results.length <= 8){
+
+          if (data.keywords[a].results.length <= 8 && a === "0"){
             tickarray = [];
-          } else{
-            tickarray = null;
           }
+
           for (var b in data.keywords[a].results) {
             $('#result').append("<li>" + a + " said " +
             data.keywords[a].results[b].count +
             " times by politicians on " +
             data.keywords[a].results[b][granularity] +"</li>");
 
-            //Custom array supplied to xaxis ticks when less than or equal to 8 month/year points
-            if (data.keywords[a].results.length <= 8){
+             //Custom array supplied to xaxis ticks when less than or equal to 8 month/year points
+            if (data.keywords[a].results.length <= 8 && a === "0"){
               tickarray.push([data.keywords[a].results[b][granularity]]);
             }
 
             if (a === "0") {
               dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
-            } else {
+
+            } else if ($('input[name="keyword_2"]').val() !== "") {
               more_dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
             }
           }
