@@ -141,7 +141,9 @@ From within the project root:
 
 $ source bin/activate
 
-$ nosetests test/app_test.py
+$ cd src
+
+$ python test.py
 
 or the name of whatever test file you are running
 
