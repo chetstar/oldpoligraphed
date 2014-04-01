@@ -1,8 +1,5 @@
 from app import app, db, lm, oid
-from apikey import _API_KEY
-import requests
-import json
-from forms import LoginForm, SavedGraphForm, KeywordSearchForm, DeleteGraph, EditForm
+from forms import LoginForm, SavedGraphForm, DeleteGraph, EditForm
 from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -153,7 +150,7 @@ def test():
         return redirect(url_for('test'))
 
     return render_template('testajax.html',
-                           saved_graphs = saved_graphs,
-                           user = user,
-                           saved_graph_form = saved_graph_form,
-                           delete_graph_form = delete_graph_form)
+                           saved_graphs=saved_graphs,
+                           user=user,
+                           saved_graph_form=saved_graph_form,
+                           delete_graph_form=delete_graph_form)
