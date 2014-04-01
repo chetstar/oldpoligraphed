@@ -76,7 +76,16 @@
         {% for graph in saved_graphs %}
         <div style="width: 100%; float: left; overflow: hidden">
         <div style="width: auto; float: left">
-            <button class="btn btn-default" style="width: 95px">{{graph.graph_name}}</button>
+            <form rol="form" id="savedGraphForm">
+                <input name='keyword_1' type='hidden' value="{{graph.keyword_1}}">
+                <input name='keyword_2' type='hidden' value="{{graph.keyword_2}}">
+                <input type='hidden' name='date_low' value="{{graph.date_low}}">
+                <input type='hidden' name='date_high' value="{{graph.date_high}}">
+                <select hidden  name='granularity' type='hidden'>
+                    <option value="{{graph.granularity}}">day</option>
+                </select>
+                <button class="btn btn-default make_graph" style="width: 95px">{{graph.graph_name}}</button>
+            </form>
         </div>
         <div style="width: auto; float: left">
 

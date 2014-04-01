@@ -14,14 +14,20 @@ $(function() {
       var more_dates = [];
       var tickarray = null;
 
+      keyword_1_value = $(this).closest('form').find( $('input[name="keyword_1"]')).val();
+      keyword_2_value = $(this).closest('form').find( $('input[name="keyword_2"]')).val();
+      date_low_value = $(this).closest('form').find( $('input[name="date_low"]')).val();
+      date_high_value = $(this).closest('form').find( $('input[name="date_high"]')).val();
+      granularity_value = $(this).closest('form').find( $('select[name="granularity"]')).val();
+
       //Set timeformat based on granularity
-      if ($('select[name="granularity"]').val() == 'day'){
+      if (granularity_value == 'day'){
         timeformat = "%b %e";
         granularity = 'day';
-      } else if($('select[name="granularity"]').val() == 'month'){
+      } else if(granularity_value == 'month'){
         timeformat = "%b %Y";
         granularity = 'month';
-      } else if($('select[name="granularity"]').val() == 'year'){
+      } else if(granularity_value == 'year'){
         timeformat = "%Y";
         granularity = 'year';
       }
@@ -30,11 +36,11 @@ $(function() {
 
       $.getJSON($SCRIPT_ROOT + '/_search_api', {
 
-        keyword_1: $('input[name="keyword_1"]').val(),
-        keyword_2: $('input[name="keyword_2"]').val(),
-        date_low: $('input[name="date_low"]').val(),
-        date_high: $('input[name="date_high"]').val(),
-        granularity: $('select[name="granularity"]').val()
+        keyword_1: keyword_1_value,
+        keyword_2: keyword_2_value,
+        date_low: date_low_value,
+        date_high: date_high_value,
+        granularity: granularity_value,
 
       }, function(data) {
 
@@ -57,16 +63,17 @@ $(function() {
             if (a === "0") {
               dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
 
-            } else if ($('input[name="keyword_2"]').val() !== "") {
+            } else if (keyword_2_value !== "") {
               more_dates.push([data.keywords[a].results[b][granularity], data.keywords[a].results[b].count]);
             }
           }
         }
-            $("#keyword").text($('input[name="keyword_1"]').val() + " vs. " + $('input[name="keyword_2"]').val());
+
+            $("#keyword").text(keyword_1_value +" vs. " + keyword_2_value);
 
             $.plot($("#placeholder"),
-              [ { label: $('input[name="keyword_1"]').val(), data: dates },
-                { label: $('input[name="keyword_2"]').val(), data: more_dates }
+              [ { label: keyword_1_value, data: dates },
+                { label: keyword_2_value, data: more_dates }
               ],
               { xaxis: {
                   mode: "time",
@@ -104,17 +111,17 @@ $(function() {
 
         $('.save-graph-button').show();
         //Add ajax input fields to hidden SavedGraph inputs
-        $('#saved_graph_form-keyword_1').val($('input[name="keyword_1"]').val());
-        $('#saved_graph_form-keyword_2').val($('input[name="keyword_2"]').val());
-        $('#saved_graph_form-date_low').val($('input[name="date_low"]').val());
-        $('#saved_graph_form-date_high').val($('input[name="date_high"]').val());
-        $('#saved_graph_form-granularity').val($('select[name="granularity"]').val());
+        $('#saved_graph_form-keyword_1, #keyword_1').val(keyword_1_value);
+        $('#saved_graph_form-keyword_2, #keyword_2').val(keyword_2_value);
+        $('#saved_graph_form-date_low, #date_low').val(date_low_value);
+        $('#saved_graph_form-date_high, #date_high').val(date_high_value);
+        $('#saved_graph_form-granularity, #granularity').val(granularity_value);
 
       });
       return false;
     };
 
-    $('#calculate').bind('click', submit_form);
+    $('.make_graph').bind('click', submit_form);
 
     $(window).resize(submit_form);
 
