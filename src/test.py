@@ -1,9 +1,5 @@
-
 #!flask/bin/python
 import os
-# import sys
-# topdir = os.path.join(os.path.dirname(__file__), "..")
-# sys.path.append(topdir)
 import unittest
 import requests
 import pprint
@@ -13,6 +9,9 @@ from config import API_KEY
 from config import basedir
 from app import app, db
 from app.models import User
+from app.date_convert import javascript_timestamp
+
+
 # import app.cw_api
 
 
@@ -56,7 +55,14 @@ class TestCase(unittest.TestCase):
 
         self.assertEquals(expected, actual, "apikey don't match: %s | %s"
             % (expected, actual))
-
+    
+    def test_javascript_timestamp(self):
+        date='2011-11-11' 
+        granularity='day'
+        actual=javascript_timestamp(date,granularity)
+        expected=1320969600000
+        self.assertEquals(expected, actual, "js date converts don't match: %d | %d"
+            % (expected, actual))
 
 if __name__ == '__main__':
     unittest.main()
