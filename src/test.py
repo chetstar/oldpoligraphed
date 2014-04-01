@@ -73,6 +73,10 @@ class TestCase(unittest.TestCase):
 
         self.assertEquals(expected, actual, "first days in cw search do not match")
 
+    def test_add_all(self):
+        # add_all(date_low, date_high, results, granularity="day"):
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,10 +2,12 @@
 {% set active_page = "edit" %}
 {% block page_content %}
 <!-- extend base layout -->
-
+</script>
+  <div class="jumbotron">
+    <div class="container">
            <h1>Hello {{g.user.nickname}}</h1>
-<br>
-<h1>Edit Your Nickname</h1>
+
+Edit Your Nickname
 <form action="" method="post" name="edit">
     {{form.hidden_tag()}}
     <table>
@@ -24,7 +26,7 @@
         <tr>
             <td></td>
             <td><input type="submit" value="Save Changes"></td>
-        </tr>
+        </tr>       </div>
     </table>
 </form>
 {% endblock %}
