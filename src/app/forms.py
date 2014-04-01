@@ -32,7 +32,7 @@ class EditForm(Form):
 class SavedGraphForm(Form):
     graph_name = TextField('Graph Name', validators = [Required()])
     keyword_1 = HiddenField('', validators = [Required()])
-    keyword_2 = HiddenField('', validators = [Required()])
+    keyword_2 = HiddenField('')
     date_low =HiddenField('', validators = [Required()])
     date_high = HiddenField('', validators = [Required()])
     granularity = HiddenField('', validators=[Required()])

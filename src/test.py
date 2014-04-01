@@ -10,7 +10,11 @@ from config import basedir
 from app import app, db
 from app.models import User
 from app.date_convert import javascript_timestamp
+<<<<<<< HEAD
+
+=======
 from app.cw_api import cw_search_keywords
+>>>>>>> FETCH_HEAD
 
 # import app.cw_api
 
@@ -63,6 +67,8 @@ class TestCase(unittest.TestCase):
         expected=1320969600000
         self.assertEquals(expected, actual, "js date converts don't match: %d | %d"
             % (expected, actual))
+<<<<<<< HEAD
+=======
 
     def test_cw_search_keywords(self):
         keywords=['obama','economy']
@@ -74,6 +80,7 @@ class TestCase(unittest.TestCase):
         expected={'count': 0, 'day': 1320969600000}
 
         self.assertEquals(expected, actual, "first days in cw search do not match")
+>>>>>>> FETCH_HEAD
 
 if __name__ == '__main__':
     unittest.main()
