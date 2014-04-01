@@ -76,13 +76,7 @@
         {% for graph in saved_graphs %}
         <div style="width: 100%; float: left; overflow: hidden">
         <div style="width: auto; float: left">
-        <form class="form form-inline keyword_search_saved_graph" method="post" role="keyword_form">
-            {{ keyword_form.hidden_tag() }}
-            {{ wtf.form_errors(keyword_form, hiddens="only") }}
-            {{ wtf.form_field(keyword_form.keyword_1, value=graph.keyword_1, type="hidden") }}
-            {{ wtf.form_field(keyword_form.keyword_2, value=graph.keyword_2, type="hidden") }}
-            {{ keyword_form.submit(class="btn btn-default", value=graph.graph_name, style="width: 95px") }}
-        </form>
+            <button class="btn btn-default" style="width: 95px">{{graph.graph_name}}</button>
         </div>
         <div style="width: auto; float: left">
 

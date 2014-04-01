@@ -204,17 +204,17 @@ def test():
     saved_graphs = None
     deleted_graph_id = None
     deleted_graph = None
-    keyword_form = KeywordSearchForm(prefix="keyword_form")
     saved_graph_form = SavedGraphForm(prefix="saved_graph_form")
-    saved_graphs_query = SavedGraph.query.filter_by(user_id=user.id)
-    if saved_graphs_query:
-        saved_graphs = saved_graphs_query
+    saved_graphs = SavedGraph.query.filter_by(user_id=user.id)
     delete_graph_form = DeleteGraph(prefix="delete_graph_form")
 
     if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
         save_graph = SavedGraph(graph_name=saved_graph_form.graph_name.data,
                                 keyword_1=saved_graph_form.keyword_1.data,
                                 keyword_2=saved_graph_form.keyword_2.data,
+                                date_low=saved_graph_form.date_low.data,
+                                date_high=saved_graph_form.date_high.data,
+                                granularity=saved_graph_form.granularity.data,
                                 user_id=user.id
                                 )
         db.session.add(save_graph)
@@ -229,7 +229,7 @@ def test():
         return redirect(url_for('test'))
 
     return render_template('testajax.html',
-                           saved_graphs=saved_graphs,
-                           user=user, keyword_form=keyword_form,
-                           saved_graph_form=saved_graph_form,
-                           delete_graph_form=delete_graph_form)
+                           saved_graphs = saved_graphs,
+                           user = user,
+                           saved_graph_form = saved_graph_form,
+                           delete_graph_form = delete_graph_form)

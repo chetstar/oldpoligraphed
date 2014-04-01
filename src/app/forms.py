@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import TextField, BooleanField, SubmitField, IntegerField
+from wtforms import TextField, BooleanField, SubmitField, IntegerField, HiddenField
 from wtforms.validators import Required
 from models import User
 
@@ -28,12 +28,14 @@ class EditForm(Form):
                 'This nickname is already in use. Please choose another one.')
             return False
         return True
-        
 
 class SavedGraphForm(Form):
-    graph_name = TextField('Graph Name', validators=[Required()])
-    keyword_1 = TextField('Keyword 1', validators=[Required()])
-    keyword_2 = TextField('Keyword 2', validators=[Required()])
+    graph_name = TextField('Graph Name', validators = [Required()])
+    keyword_1 = HiddenField('', validators = [Required()])
+    keyword_2 = HiddenField('', validators = [Required()])
+    date_low =HiddenField('', validators = [Required()])
+    date_high = HiddenField('', validators = [Required()])
+    granularity = HiddenField('', validators=[Required()])
     submit = SubmitField('Save Graph!')
 
 
@@ -43,7 +45,7 @@ class DeleteGraph(Form):
 
 
 class KeywordSearchForm(Form):
-    keyword_1 = TextField('Keyword 1', validators=[Required()])
-    keyword_2 = TextField('Keyword 2', validators=[Required()])
+    keyword_1 = TextField('Keyword 1', validators = [Required()])
+    keyword_2 = TextField('Keyword 2', validators = [Required()])
     submit = SubmitField('Graph!')
 

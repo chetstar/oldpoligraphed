@@ -48,10 +48,6 @@ $(function() {
           }
 
           for (var b in data.keywords[a].results) {
-            $('#result').append("<li>" + a + " said " +
-            data.keywords[a].results[b].count +
-            " times by politicians on " +
-            data.keywords[a].results[b][granularity] +"</li>");
 
              //Custom array supplied to xaxis ticks when less than or equal to 8 month/year points
             if (data.keywords[a].results.length <= 8 && a === "0"){
@@ -105,17 +101,20 @@ $(function() {
         $('.hidden-container').hide();
         $('#result').text(data.user);
         $('input[name=a]').focus().select();
+
+        $('.save-graph-button').show();
+        //Add ajax input fields to hidden SavedGraph inputs
+        $('#saved_graph_form-keyword_1').val($('input[name="keyword_1"]').val());
+        $('#saved_graph_form-keyword_2').val($('input[name="keyword_2"]').val());
+        $('#saved_graph_form-date_low').val($('input[name="date_low"]').val());
+        $('#saved_graph_form-date_high').val($('input[name="date_high"]').val());
+        $('#saved_graph_form-granularity').val($('select[name="granularity"]').val());
+
       });
       return false;
     };
 
     $('#calculate').bind('click', submit_form);
-
-    $('input[type=text]').bind('keydown', function(e) {
-      if (e.keyCode == 13) {
-        submit_form(e);
-      }
-    });
 
     $(window).resize(submit_form);
 

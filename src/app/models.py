@@ -10,12 +10,18 @@ class SavedGraph(db.Model):
     graph_name = db.Column(db.String(240))
     keyword_1 = db.Column(db.String(240))
     keyword_2 = db.Column(db.String(240))
+    date_low = db.Column(db.String(10))
+    date_high = db.Column(db.String(10))
+    granularity = db.Column(db.String(5))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __init__(self, graph_name, keyword_1, keyword_2, user_id):
+    def __init__(self, graph_name, keyword_1, keyword_2, date_low, date_high, granularity, user_id):
         self.graph_name = graph_name
         self.keyword_1 = keyword_1
         self.keyword_2 = keyword_2
+        self.date_low = date_low
+        self.date_high = date_high
+        self.granularity = granularity
         self.user_id = user_id
 
     def __repr__(self):
@@ -39,7 +45,7 @@ class User(db.Model):
                 break
             version += 1
         return new_nickname
-        
+
     def is_authenticated(self):
         return True
 
