@@ -75,8 +75,6 @@
         {% if  saved_graphs%}
         {% for graph in saved_graphs %}
         <div style="width: 100%; float: left; overflow: hidden">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div style="width: auto; float: left">
             <form rol="form" id="savedGraphForm">
                 <input name='keyword_1' type='hidden' value="{{graph.keyword_1}}">
@@ -89,34 +87,6 @@
                 <button class="btn btn-default make_graph" style="width: 95px">{{graph.graph_name}}</button>
             </form>
         </div>
-=======
-=======
->>>>>>> FETCH_HEAD
-          <div style="width: auto; float: left">
-            <form class="form-inline" role="form">
-              <div class="hidden">
-                <input name='keyword_1' value="{{ graph.keyword_1 }}" class="form-control" id="keyword_1" placeholder="Keyword 1">
-              </div>
-              <div class="hidden">
-                <input name='keyword_2' value="{{ graph.keyword_2 }}" class="form-control" id="keyword_2" placeholder="Keyword 2">
-              </div>
-              <div class="hidden">
-                <input type="date" name='date_low' value="{{ graph.date_low }}" class="form-control" id="date_low" placeholder="Start Date">
-              </div>
-              <div class="hidden">
-                <input type="date" name='date_high' value="{{ graph.date_high }}" class="form-control" id="date_high" placeholder="End Date">
-              </div>
-              <div class="hidden">
-                <input name='granularity' value="{{ graph.granularity }}" id="granularity"  class="form-control">
-              </div>
-
-              <button type="submit" id="calculate" class="btn btn-default" style="width: 95px">{{graph.graph_name}}</button>
-            </form>
-          </div>
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
         <div style="width: auto; float: left">
 
         <form class="form form-inline delete_saved_graph" method="post" role="delete_graph_form">
