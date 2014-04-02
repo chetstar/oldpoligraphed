@@ -2,6 +2,7 @@
 import os
 import unittest
 import requests
+import json
 import pprint
 print os.getcwd()
 from apikey import _API_KEY
@@ -10,7 +11,7 @@ from config import basedir
 from app import app, db
 from app.models import User
 from app.date_convert import javascript_timestamp
-from app.cw_api import cw_search_keywords
+from app.cw_api import cw_search_keywords, add_all
 
 
 class TestCase(unittest.TestCase):
@@ -74,8 +75,30 @@ class TestCase(unittest.TestCase):
         self.assertEquals(expected, actual, "first days in cw search do not match")
 
     def test_add_all(self):
+        """still working on what this test will be! """
+        keywords=['obama','economy']
+        date_low='2011-11-12'
+        date_high='2011-11-15'
+        granularity='day'        
+        API_KEY = _API_KEY
+        api_results = []
+        for keyword in keywords:
+            query_params = {'apikey': API_KEY,
+                        'phrase': keyword,
+                        'start_date': date_low,
+                        'end_date': date_high,
+                        'granularity': granularity
+                        }
+            endpoint = 'http://capitolwords.org/api/dates.json'
+            response = requests.get(endpoint, params=query_params)
+            if response.status_code == 200:
+                results = json.loads(response.text)
+                print len(results)
+                results_entire_range = add_all(date_low, date_high, results, granularity="day")
+                print len(results_entire_range)
+                return results_entire_range
         # add_all(date_low, date_high, results, granularity="day"):
-        pass
+
 
 
 if __name__ == '__main__':
