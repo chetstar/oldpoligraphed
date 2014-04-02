@@ -2,6 +2,20 @@
     position: relative;
 }
 
+.graph-list-container{
+    position: relative;
+}
+
+.delete_graph_container{
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.delete_graph_container .glyphicon-remove{
+    color: #d9534f;
+}
+
 .hidden-container{
     display: none;
 }
@@ -45,4 +59,14 @@
 
 .save-graph-button{
     display: none;
+}
+
+.saved-graph-list li{
+    cursor: pointer;
+    border-top: 1px solid #ccc;
+    padding: 15px;
+}
+
+.saved-graphs h5{
+    padding-left: 15px;
 }

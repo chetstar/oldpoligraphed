@@ -64,6 +64,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
+    {% block sidebar %}
         <ul class="nav nav-sidebar">
             {% for href, id, caption in navigation_bar %}
             <li{% if id == active_page %}
@@ -72,37 +73,7 @@
             <a href="{{ href|e }}">{{ caption|e }}</a></li>
             {% endfor %}
         </ul>
-        {% if  saved_graphs%}
-        {% for graph in saved_graphs %}
-        <div style="width: 100%; float: left; overflow: hidden">
-        <div style="width: auto; float: left">
-            <form rol="form" id="savedGraphForm">
-                <input name='keyword_1' type='hidden' value="{{graph.keyword_1}}">
-                <input name='keyword_2' type='hidden' value="{{graph.keyword_2}}">
-                <input type='hidden' name='date_low' value="{{graph.date_low}}">
-                <input type='hidden' name='date_high' value="{{graph.date_high}}">
-                <select hidden  name='granularity' type='hidden'>
-                    <option value="{{graph.granularity}}">day</option>
-                </select>
-                <button class="btn btn-default make_graph" style="width: 95px">{{graph.graph_name}}</button>
-            </form>
-        </div>
-        <div style="width: auto; float: left">
-
-        <form class="form form-inline delete_saved_graph" method="post" role="delete_graph_form">
-            {{ delete_graph_form.hidden_tag() }}
-            {{ wtf.form_errors(delete_graph_form, hiddens="only") }}
-            {{ wtf.form_field(delete_graph_form.graph_id, value=graph.id, type="hidden") }}
-
-            <button class="btn btn-danger" id="delete_graph_form-submit" name="delete_graph_form-submit" type="submit" value="Delete">
-                <span class="glyphicon glyphicon-remove"></span>
-            </button>
-        </form>
-        </div>
-        </div>
-        {% endfor %}
-        {% endif %}
-
+    {%endblock%}
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     {% block page_content %}
