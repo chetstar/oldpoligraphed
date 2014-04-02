@@ -99,7 +99,5 @@ class TestCase(unittest.TestCase):
                 return results_entire_range
         # add_all(date_low, date_high, results, granularity="day"):
 
-
-
 if __name__ == '__main__':
     unittest.main()
