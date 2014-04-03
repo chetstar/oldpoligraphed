@@ -76,9 +76,9 @@ class TestCase(unittest.TestCase):
 
     def test_add_all(self):
         """still working on what this test will be! """
-        keywords=['obama','economy']
-        date_low='2011-11-12'
-        date_high='2011-11-15'
+        keywords=['guns','economy']
+        date_low='2011-11-17'
+        date_high='2011-11-18'
         granularity='day'        
         API_KEY = _API_KEY
         api_results = []
@@ -91,13 +91,11 @@ class TestCase(unittest.TestCase):
                         }
             endpoint = 'http://capitolwords.org/api/dates.json'
             response = requests.get(endpoint, params=query_params)
-            if response.status_code == 200:
-                results = json.loads(response.text)
-                print len(results)
-                results_entire_range = add_all(date_low, date_high, results, granularity="day")
-                print len(results_entire_range)
-                return results_entire_range
-        # add_all(date_low, date_high, results, granularity="day"):
+            results = json.loads(response.text)
+            results_entire_range = add_all(date_low, date_high, results, granularity="day")
+            expected = {u'results': [{'count': 0, 'day': '2011-11-17'}, {'count': 0, 'day': '2011-11-18'}]}
+            actual = results_entire_range
+            self.assertEquals(expected, actual, "add missing dates not working")
 
 if __name__ == '__main__':
     unittest.main()
