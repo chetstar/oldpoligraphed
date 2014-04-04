@@ -126,7 +126,7 @@ def test():
     deleted_graph_id = None
     deleted_graph = None
     saved_graph_form = SavedGraphForm(prefix="saved_graph_form")
-    saved_graphs = SavedGraph.query.filter_by(user_id=user.id)
+    saved_graphs = SavedGraph.query.filter_by(user_id=user.id).all()
     delete_graph_form = DeleteGraph(prefix="delete_graph_form")
 
     if saved_graph_form.validate_on_submit() and saved_graph_form.submit.data:
