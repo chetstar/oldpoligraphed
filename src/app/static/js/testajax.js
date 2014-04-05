@@ -68,8 +68,11 @@ $(function() {
             }
           }
         }
-
-            $("#keyword").text(keyword_1_value +" vs. " + keyword_2_value);
+            if(keyword_2_value !== ""){
+              $("#keyword").text(keyword_1_value +" vs. " + keyword_2_value);
+            } else{
+              $("#keyword").text(keyword_1_value);
+            }
 
             $.plot($("#placeholder"),
               [ { label: keyword_1_value, data: dates },
