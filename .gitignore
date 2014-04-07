@@ -17,3 +17,4 @@ src/app.db
 **/tmp/temp
 src/migrations
 migrations/
+build/

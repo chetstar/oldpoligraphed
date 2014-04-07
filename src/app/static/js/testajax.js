@@ -9,16 +9,16 @@ $(function() {
         input.val(today);
     };
 
-    var submit_form = function(e) {
+    var submit_form = function(testing) {
       var dates = [];
       var more_dates = [];
       var tickarray = null;
 
-      keyword_1_value = $(this).closest('form').find( $('input[name="keyword_1"]')).val();
-      keyword_2_value = $(this).closest('form').find( $('input[name="keyword_2"]')).val();
-      date_low_value = $(this).closest('form').find( $('input[name="date_low"]')).val();
-      date_high_value = $(this).closest('form').find( $('input[name="date_high"]')).val();
-      granularity_value = $(this).closest('form').find( $('select[name="granularity"]')).val();
+      keyword_1_value = testing.closest('form').find( $('input[name="keyword_1"]')).val();
+      keyword_2_value = testing.closest('form').find( $('input[name="keyword_2"]')).val();
+      date_low_value = testing.closest('form').find( $('input[name="date_low"]')).val();
+      date_high_value = testing.closest('form').find( $('input[name="date_high"]')).val();
+      granularity_value = testing.closest('form').find( $('select[name="granularity"]')).val();
 
       //Set timeformat based on granularity
       if (granularity_value == 'day'){
@@ -124,9 +124,15 @@ $(function() {
       return false;
     };
 
-    $('.make_graph').bind('click', submit_form);
+    $('.make_graph').click(function(){
+      testing = $(this);
+      submit_form(testing);
+    });
 
-    $(window).resize(submit_form);
+    $(window).resize(function(){
+      testing = $('#calculate');
+      submit_form(testing);
+    });
 
     $('input[name=a]').focus();
 
