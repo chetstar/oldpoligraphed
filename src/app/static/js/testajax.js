@@ -114,6 +114,7 @@ $(function() {
 
         $('.save-graph-button').show();
         //Add ajax input fields to hidden SavedGraph inputs
+        $("#saved_graph_form-graph_name").prop('required',true);
         $('#saved_graph_form-keyword_1, #keyword_1').val(keyword_1_value);
         $('#saved_graph_form-keyword_2, #keyword_2').val(keyword_2_value);
         $('#saved_graph_form-date_low, #date_low').val(date_low_value);
