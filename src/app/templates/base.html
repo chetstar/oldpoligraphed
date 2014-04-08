@@ -6,20 +6,20 @@
 {% set active_page = active_page|default('index') -%}
 {% if active_page == 'index' %}
 {% set navigation_bar = [
-    ('/graph', 'graphs', 'Graphs'),
-    ('/contact', 'contact', 'Contact'),
-    ('/about', 'about', 'About'),
-    ('/jobs', 'jobs', 'Jobs'),
-    ('/donations', 'donations', 'Donations')
+    ('/graph', 'graphs', 'Graphs', 'glyphicon glyphicon-stats'),
+    ('/contact', 'contact', 'Contact', 'glyphicon glyphicon-send'),
+    ('/about', 'about', 'About', 'glyphicon glyphicon-info-sign'),
+    ('/jobs', 'jobs', 'Jobs', 'glyphicon glyphicon-cog'),
+    ('/donations', 'donations', 'Donations', 'glyphicon glyphicon-usd')
 ] -%}
 {% else %}
 {% set navigation_bar = [
-    ('/graph', 'graphs', 'Graphs'),
-    ('/contact', 'contact', 'Contact'),
-    ('/about', 'about', 'About'),
-    ('/jobs', 'jobs', 'Jobs'),
-    ('/donations', 'donations', 'Donations'),
-    ('/', 'index', 'Home')
+    ('/graph', 'graphs', 'Graphs', 'glyphicon glyphicon-stats'),
+    ('/contact', 'contact', 'Contact', 'glyphicon glyphicon-send'),
+    ('/about', 'about', 'About', 'glyphicon glyphicon-info-sign'),
+    ('/jobs', 'jobs', 'Jobs', 'glyphicon glyphicon-cog'),
+    ('/donations', 'donations', 'Donations', 'glyphicon glyphicon-usd'),
+    ('/', 'index', 'Home', 'glyphicon glyphicon-home')
 ] -%}
 {% endif %}
 {% block head %}
@@ -38,14 +38,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="{{ url_for('index') }}">Poligraphed <span class="glyphicon glyphicon-stats"></span></a>
         </div>
         <div class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form">
-                {% if g.user.is_authenticated() %}
-                <a href ="{{ url_for('edit') }}">edit profile</a>
-                | <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
-                {% endif %}
-            </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+        {% if g.user.is_authenticated() %}
+          <ul class="dropdown-menu">
+            <li><a href ="{{ url_for('edit') }}">Account</a></li>
+            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+          </ul>
+        {% endif %}
+        </li>
+      </ul>
+
         </div><!--/.navbar-collapse -->
     </div>
 </header>
@@ -66,11 +73,11 @@
     <div class="col-sm-3 col-md-2 sidebar">
     {% block sidebar %}
         <ul class="nav nav-sidebar">
-            {% for href, id, caption in navigation_bar %}
+            {% for href, id, caption, icon in navigation_bar %}
             <li{% if id == active_page %}
             class="active"
             {% endif%}>
-            <a href="{{ href|e }}">{{ caption|e }}</a></li>
+            <a href="{{ href|e }}"><strong><span class="{{icon}}"></span> {{ caption|e }} <span class="glyphicon glyphicon-chevron-right pull-right"></span></strong></a></li>
             {% endfor %}
         </ul>
     {%endblock%}

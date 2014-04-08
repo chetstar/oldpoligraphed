@@ -50,9 +50,9 @@
 {% endblock %}
 
 {% block page_content %}
-
-<h1>Graph Some Shit!</h1>
-
+<div class="page-header">
+  <h1>Graph Some Shit!</h1>
+</div>
 <form class="form-inline ajax-graph" role="form">
 
   <div class="form-group">
@@ -81,7 +81,7 @@
 
   <div class="form-group">
     <div class="">
-      <a id="calculate" class="btn btn-danger make_graph">Submit</a>
+      <a id="calculate" class="btn btn-danger make_graph">Make Graph <span class="glyphicon glyphicon-stats"></span></a>
     </div>
   </div>
 </form>
@@ -102,9 +102,9 @@
 </div>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-small save-graph-button" data-toggle="modal" data-target="#saveGraph">
-  Save Graph
-</button>
+
+    <button type="button" class="btn btn-success btn-lg save-graph-button pull-right" data-toggle="modal" data-target="#saveGraph"><span class="glyphicon glyphicon-save"></span> Save Graph</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="saveGraph" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

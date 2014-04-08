@@ -36,7 +36,7 @@ class SavedGraphForm(Form):
     date_low =HiddenField('', validators = [Required()])
     date_high = HiddenField('', validators = [Required()])
     granularity = HiddenField('', validators=[Required()])
-    submit = SubmitField('Save Graph!')
+    submit = SubmitField('Save Graph')
 
 
 class DeleteGraph(Form):
