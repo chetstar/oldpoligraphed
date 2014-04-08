@@ -9,3 +9,15 @@
 .btn{
     vertical-align: bottom;
 }
+
+.navbar-brand{
+    color: #d9534f !important;
+}
+
+.navbar-brand .brand-white{
+    color: #fff;
+}
+
+.navbar-brand .glyphicon{
+    color: #428bca;
+}

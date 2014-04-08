@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url_for('index') }}">Poligraphed <span class="glyphicon glyphicon-stats"></span></a>
+          <a class="navbar-brand" href="{{ url_for('index') }}">Poli<span class="brand-white">graphed</span> <span class="glyphicon glyphicon-stats"></span></a>
         </div>
         <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -95,5 +95,4 @@
 <script type=text/javascript>
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
-<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/testajax.js') }}"></script>
 {% endblock %}

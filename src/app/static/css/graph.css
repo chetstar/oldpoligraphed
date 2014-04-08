@@ -1,5 +1,17 @@
-.ajax-graph input, select, a{
+.ajax-graph input, .ajax-graph select, .ajax-graph a{
     margin-top: 10px;
+}
+
+.navbar-brand{
+    color: #d9534f !important;
+}
+
+.navbar-brand .brand-white{
+    color: #fff;
+}
+
+.navbar-brand .glyphicon{
+    color: #428bca;
 }
 
 .graph-container{

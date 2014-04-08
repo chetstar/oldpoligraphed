@@ -51,7 +51,8 @@
 
 {% block page_content %}
 <div class="page-header">
-  <h1>Graph Some Shit!</h1>
+  <h1>A Politician Says What?</h1>
+  <h5 class="text-primary">Find out the frequency politicians say your favorite words.</h5>
 </div>
 <form class="form-inline ajax-graph" role="form">
 
@@ -85,7 +86,7 @@
     </div>
   </div>
 </form>
-<h1 id="keyword"></h1>
+<h2 id="keyword"></h2>
 <div class="graph-container">
     <div class="hidden-container">
         <div class="opaque-overlay"></div>
@@ -134,4 +135,5 @@
 <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/flot.js') }}"></script>
 <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.time.js') }}"></script>
 <script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.tooltip.js') }}"></script>
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/testajax.js') }}"></script>
 {% endblock %}
