@@ -21,3 +21,21 @@
 .navbar-brand .glyphicon{
     color: #428bca;
 }
+
+.menu{
+    cursor: pointer
+}
+
+.menu h5{
+    margin-left: 15px;
+    position: relative;
+}
+
+.menu li{
+    border-bottom: 1px solid #ccc;
+}
+
+.menu .glyphicon-plus{
+    position: absolute;
+    right: 10px;
+}
