@@ -79,8 +79,7 @@
                 </h5>
             </li>
         </ul>
-
-        <ul id="demo" class="nav nav-sidebar collapse">
+        <ul id="demo"  {% if active_page == 'graphs' %}class="nav nav-sidebar collapse"{% else %}class="nav nav-sidebar collapse in"{% endif %}>
             {% for href, id, caption, icon in navigation_bar %}
             <li{% if id == active_page %}
             class="active"
