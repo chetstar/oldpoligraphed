@@ -75,7 +75,7 @@
         <ul class='list-unstyled menu' data-toggle="collapse" data-target="#demo">
             <li>
                 <h5>
-                  <strong>Menu</strong><span class="glyphicon glyphicon-plus"></span>
+                  <strong>Menu</strong><span {% if active_page == 'graphs' %}class="glyphicon glyphicon-plus"{% else %}class="glyphicon glyphicon-minus"{% endif %}></span>
                 </h5>
             </li>
         </ul>
@@ -99,6 +99,7 @@
 
 {% block scripts %}
 {{ super() }}
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script type=text/javascript>
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
