@@ -143,4 +143,8 @@ $(function() {
    date_value_input($('#date_low'), 30);
    date_value_input($('#date_high'), 0);
 
+$("#placeholder").bind("plotclick", function (event, pos, item) {
+    alert(item.datapoint + ' ' + item.series.label);
+});
+
   });
