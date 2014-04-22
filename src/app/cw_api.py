@@ -4,6 +4,26 @@ import json
 from date_convert import javascript_timestamp
 import datetime
 
+def cw_search_text(keywords, date_low, date_high):
+    API_KEY = _API_KEY
+    api_results = []
+    for keyword in keywords:
+        query_params = {'apikey': API_KEY,
+                    'phrase': keyword,
+                    'start_date': date_low,
+                    'end_date': date_high,
+                    'sort': 'date desc'
+                    }
+
+        endpoint = 'http://capitolwords.org/api/1/text.json'
+
+        response = requests.get(endpoint, params=query_params)
+        if response.status_code == 200:
+            results = json.loads(response.text)
+            api_results.append(results)
+
+    return api_results
+
 def cw_search_keywords(keywords, date_low, date_high, granularity):
     API_KEY = _API_KEY
     api_results = []

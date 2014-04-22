@@ -4,7 +4,7 @@ from models import User, ROLE_USER, ROLE_ADMIN, SavedGraph
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from email import send_email
-from cw_api import cw_search_keywords
+from cw_api import cw_search_keywords, cw_search_text
 
 
 @app.route('/')
@@ -114,6 +114,20 @@ def _search_api():
     granularity = request.args.get('granularity', '', type=str)
 
     api_results = cw_search_keywords(keywords, date_low, date_high, granularity)
+
+    return jsonify(keywords=api_results)
+
+@app.route('/_search_cr_api')
+def _search_cr_api():
+
+    keywords = [request.args.get('keyword_1', '', type=str),
+                request.args.get('keyword_2', '', type=str)
+                ]
+
+    date_low = request.args.get('date_low', '', type=str)
+    date_high = request.args.get('date_high', '', type=str)
+
+    api_results = cw_search_text(keywords, date_low, date_high)
 
     return jsonify(keywords=api_results)
 
