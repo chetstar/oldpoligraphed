@@ -7,7 +7,10 @@
 }
 
 .graph-container{
+
+/*    float: left;*/
     position: relative;
+/*    width: 75%;*/
 }
 
 .graph-list-container{
@@ -79,6 +82,10 @@
 
 .saved-graphs h5{
     padding-left: 15px;
+}
+
+.text-records{
+    height: 300px;
 }
 
 @media screen and (max-width: 768px){

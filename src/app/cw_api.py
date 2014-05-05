@@ -8,19 +8,21 @@ def cw_search_text(keywords, date_low, date_high):
     API_KEY = _API_KEY
     api_results = []
     for keyword in keywords:
-        query_params = {'apikey': API_KEY,
-                    'phrase': keyword,
-                    'start_date': date_low,
-                    'end_date': date_high,
-                    'sort': 'date desc'
-                    }
+        if keyword != '':
+            query_params = {'apikey': API_KEY,
+                        'phrase': keyword,
+                        'start_date': date_low,
+                        'end_date': date_high,
+                        'sort': 'date desc',
+                        'per_page': 2
+                        }
 
-        endpoint = 'http://capitolwords.org/api/1/text.json'
+            endpoint = 'http://capitolwords.org/api/1/text.json'
 
-        response = requests.get(endpoint, params=query_params)
-        if response.status_code == 200:
-            results = json.loads(response.text)
-            api_results.append(results)
+            response = requests.get(endpoint, params=query_params)
+            if response.status_code == 200:
+                results = json.loads(response.text)
+                api_results.append(results)
 
     return api_results
 

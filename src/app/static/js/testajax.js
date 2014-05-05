@@ -91,8 +91,17 @@ $(function() {
                 },
               grid: {
                 hoverable: true,
-                clickable: true
-              },
+                clickable: true,
+                borderWidth: 1,
+                minBorderMargin: 20,
+                labelMargin: 10,
+                axisMargin: 8,
+                        },
+                margin: {
+                  top: 8,
+                  bottom: 20,
+                  left: 20
+                },
               legend: {
                   show: true,
                   // labelFormatter: null or (fn: string, series object -> string)
@@ -138,13 +147,25 @@ $(function() {
 
     $('input[name=a]').focus();
 
-    $.plot($("#placeholder"), [[0,0]]);
+    $.plot($("#placeholder"), [[0,0]],
+            {
+              grid: {
+                hoverable: true,
+                clickable: true,
+                borderWidth: 1,
+                minBorderMargin: 20,
+                labelMargin: 10,
+                axisMargin: 8,
+                        },
+                margin: {
+                  top: 8,
+                  bottom: 20,
+                  left: 20
+                },
+              }
+      );
 
    date_value_input($('#date_low'), 30);
    date_value_input($('#date_high'), 0);
 
-$("#placeholder").bind("plotclick", function (event, pos, item) {
-    alert(item.datapoint + ' ' + item.series.label);
 });
-
-  });
